@@ -4,6 +4,7 @@ import { Menu, Phone, X } from "lucide-react";
 import { motion, MotionConfig, useReducedMotion } from "motion/react";
 import { useEffect, useId, useRef, useState } from "react";
 import type { ReactNode } from "react";
+import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { company, contactLinks } from "@/config/site";
 import { BookServiceButton } from "./book-service-button";
 import { NavigationLinks } from "./navigation-links";
@@ -108,6 +109,10 @@ export function MainNavigation({ logo }: { logo: ReactNode }) {
                 <a href={contactLinks.phone} className={styles.mobilePhone}>
                   <Phone size={16} aria-hidden="true" /> {company.phone}
                 </a>
+                <a href={contactLinks.whatsapp} className={styles.mobilePhone} target="_blank" rel="noopener noreferrer">
+                  <WhatsAppIcon width={18} height={18} /> WhatsApp {company.shortName}
+                </a>
+                <p className="text-center text-sm text-ocean-blue">{company.address}</p>
               </div>
             </div>
           </div>

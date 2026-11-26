@@ -1,0 +1,134 @@
+.section {
+  padding-block: var(--spacing-section);
+  background: var(--color-ice-white);
+}
+
+.heading { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.75rem; margin-bottom: 2.5rem; }
+.intro { max-width: 35rem; }
+.eyebrow { display: flex; align-items: center; gap: 0.625rem; margin-bottom: 0.75rem; color: var(--color-ocean-blue); font-size: 0.875rem; font-weight: 600; }
+.eyebrow::before { content: ""; width: 1.5rem; height: 2px; background: var(--color-electric-cyan); }
+.title { font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 650; letter-spacing: -0.04em; }
+.description { margin-top: 1rem; color: var(--color-ocean-blue); font-size: 1rem; line-height: 1.8; }
+.viewAll {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: 0.875rem;
+  min-height: 3rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid rgb(18 59 93 / 25%);
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background-color 200ms ease, border-color 200ms ease;
+}
+.viewAll svg { transition: transform 220ms ease; }
+.viewAll:hover, .viewAll:focus-visible { background: var(--color-pure-white); border-color: var(--color-solar-orange); }
+.viewAll:hover svg, .viewAll:focus-visible svg { transform: translate(2px, -2px); }
+
+.grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+.tile {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  min-height: 21rem;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  background: var(--color-midnight-navy);
+  color: var(--color-pure-white);
+}
+.tileLink { position: relative; display: block; width: 100%; height: 100%; min-height: inherit; border-radius: inherit; }
+.tileLink:focus-visible { outline: 3px solid var(--color-electric-cyan); outline-offset: -5px; }
+.imageWrap { position: absolute; inset: 0; overflow: hidden; }
+.image { object-fit: cover; transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1); }
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 15%, rgb(9 27 48 / 15%) 35%, rgb(9 27 48 / 93%) 100%);
+}
+.tileContent { position: absolute; right: 4.75rem; bottom: 1.5rem; left: 1.5rem; }
+.tileTitle { font-size: clamp(1.625rem, 2.25vw, 2rem); font-weight: 600; line-height: 1.15; letter-spacing: -0.035em; text-wrap: initial; }
+.tileDescription { max-width: 40ch; margin-top: 0.75rem; color: var(--color-ice-white); font-size: 0.875rem; line-height: 1.7; }
+.tileArrow {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.5rem;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgb(234 248 252 / 35%);
+  border-radius: 50%;
+  background: rgb(9 27 48 / 30%);
+  color: var(--color-pure-white);
+  transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease;
+}
+.tileArrow svg { transition: transform 250ms ease; }
+.tileLink:focus-visible .image { transform: scale(1.055); }
+.tileLink:focus-visible .tileArrow { background: var(--color-electric-cyan); border-color: var(--color-solar-orange); color: var(--color-midnight-navy); }
+.tileLink:focus-visible .tileArrow svg { transform: translate(2px, -2px); }
+
+.installation .image { object-position: 50% 30%; }
+.repair .image { object-position: 48% 30%; }
+.routine, .full { min-height: 14rem; }
+.routine { background: var(--color-pure-white); color: var(--color-midnight-navy); }
+.routine .imageWrap, .full .imageWrap { left: 48%; }
+.routine .image { object-position: 62% center; }
+.full .image { object-position: 65% center; }
+.routine .scrim { background: linear-gradient(90deg, var(--color-pure-white) 36%, rgb(255 255 255 / 93%) 48%, rgb(255 255 255 / 12%) 75%, transparent); }
+.full .scrim { background: linear-gradient(90deg, var(--color-midnight-navy) 36%, rgb(9 27 48 / 96%) 48%, rgb(9 27 48 / 25%) 75%, transparent); }
+.routine .tileContent, .full .tileContent { top: 1.5rem; right: 41%; bottom: auto; }
+.routine .tileTitle, .full .tileTitle { font-size: 1.375rem; }
+.routine .tileDescription { color: var(--color-ocean-blue); }
+.routine .tileArrow { border-color: rgb(18 59 93 / 12%); background: var(--color-pure-white); color: var(--color-midnight-navy); }
+.relocation .tileTitle { font-size: 1.5rem; }
+.relocation .image { object-position: 58% center; }
+.pcb { min-height: 21rem; }
+.pcb .imageWrap { top: 34%; }
+.pcb .image { object-position: 55% 75%; }
+.pcb .scrim { background: linear-gradient(180deg, var(--color-midnight-navy) 27%, rgb(9 27 48 / 90%) 44%, rgb(9 27 48 / 5%) 74%, rgb(9 27 48 / 35%)); }
+.pcb .tileContent { top: 1.5rem; right: 1.5rem; bottom: auto; }
+.pcb .tileTitle { max-width: 12ch; font-size: 1.5rem; }
+.pcb .tileDescription { max-width: 27ch; }
+
+@media (hover: hover) {
+  .tileLink:hover .image { transform: scale(1.055); }
+  .tileLink:hover .tileArrow { background: var(--color-electric-cyan); border-color: var(--color-solar-orange); color: var(--color-midnight-navy); }
+  .tileLink:hover .tileArrow svg { transform: translate(2px, -2px); }
+}
+
+@media (min-width: 640px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .installation, .repair { grid-column: 1 / -1; min-height: 23rem; }
+  .routine, .full { min-height: 16rem; }
+  .relocation, .pcb { min-height: 22rem; }
+}
+
+@media (min-width: 1024px) {
+  .grid { grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: repeat(4, 10.625rem); }
+  .tile { min-height: 0; }
+  .installation { grid-column: 1 / 8; grid-row: 1 / 3; }
+  .routine { grid-column: 8 / 13; grid-row: 1 / 2; }
+  .full { grid-column: 8 / 13; grid-row: 2 / 3; }
+  .repair { grid-column: 1 / 6; grid-row: 3 / 5; }
+  .relocation { grid-column: 6 / 10; grid-row: 3 / 5; }
+  .pcb { grid-column: 10 / 13; grid-row: 3 / 5; }
+  .routine .tileContent, .full .tileContent { top: 1.25rem; left: 1.5rem; }
+  .routine .tileDescription, .full .tileDescription { margin-top: 0.5rem; line-height: 1.5; }
+  .routine .tileArrow, .full .tileArrow { right: 1.25rem; bottom: 1.25rem; }
+}
+
+@media (max-width: 359px) {
+  .tileContent { left: 1.25rem; right: 4.5rem; }
+  .tileTitle { font-size: 1.5rem; }
+  .tileArrow { right: 1rem; }
+  .routine .tileTitle, .full .tileTitle { font-size: 1.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section *, .section *::after { transition: none; }
+  .tileLink:is(:hover, :focus-visible) .image,
+  .tileLink:is(:hover, :focus-visible) .tileArrow svg,
+  .viewAll:is(:hover, :focus-visible) svg { transform: none; }
+}

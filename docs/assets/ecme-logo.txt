@@ -1,0 +1,13 @@
+Earth Coolman Engineers brand assets
+
+Original supplied artwork: public/images/brand/ecme-logo-original.jpeg
+Transparent delivery logo: public/images/brand/ecme-logo.png (1024 x 1024 PNG)
+Favicon: src/app/favicon.ico (16, 32, and 48px)
+App icon: src/app/icon.png (192px)
+Apple icon: src/app/apple-icon.png (180px, midnight navy backing)
+
+Method: exact pixel-based background removal, approved by the owner after the built-in imagegen edit attempts altered fine details. The generated alternatives are not used in the website. The original JPEG is preserved without changes.
+
+The preparation script removes the black matte and near-black JPEG noise, un-mattes antialiased edges, trims empty margins, and uses Lanczos resampling for delivery sizes. It does not trace, redraw, substitute lettering, or invent detail. A larger pixel size is not a claim of recovered source detail. The favicon crops the existing snowflake/sun ECME emblem from the supplied artwork.
+
+Rebuild assets with: node scripts/prepare-brand-assets.mjs

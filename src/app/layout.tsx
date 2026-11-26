@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { SiteHeader } from "@/components/layout/site-header";
+import { FloatingWhatsApp } from "@/components/layout/floating-whatsapp";
 import { company } from "@/config/site";
 import "./globals.css";
 
@@ -19,8 +20,15 @@ const manrope = localFont({
 });
 
 export const metadata: Metadata = {
-  title: `${company.name} | Premium A/C Service`,
-  description: "Premium air conditioning service and care.",
+  title: `${company.name} (ECME) | A/C Services`,
+  description: company.description,
+  applicationName: company.name,
+  openGraph: {
+    title: `${company.name} (ECME)`,
+    description: company.description,
+    siteName: company.name,
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -32,6 +40,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <SiteHeader />
         {children}
+        <FloatingWhatsApp />
       </body>
     </html>
   );

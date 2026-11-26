@@ -1,16 +1,22 @@
-// Temporary identity and contact details. Replace these before launch.
+// Company identity and contact details supplied by Earth Coolman Engineers.
 export const company = {
-  name: "Aeris Air",
-  descriptor: "Air conditioning",
-  phone: "+94 11 000 0000",
-  email: "hello@aerisair.example",
-  workingHours: "Mon–Sat · 8am–6pm",
+  name: "Earth Coolman Engineers",
+  shortName: "ECME",
+  wordmark: "Earth Coolman",
+  descriptor: "Engineers",
+  phone: "0719701510",
+  phoneInternational: "+94719701510",
+  address: "No.121/11, Siyabalagoada, Polgasowita",
+  facebook: "https://www.facebook.com/share/1FyfiNsQsW/",
+  logo: "/images/brand/ecme-logo.png",
+  description: "A/C installation, repairs and maintenance by Earth Coolman Engineers (ECME), Polgasowita. Call or WhatsApp 0719701510.",
   bookingHref: "/contact#book-service",
 } as const;
 
 export const contactLinks = {
-  phone: `tel:${company.phone.replace(/[^+\d]/g, "")}`,
-  email: `mailto:${company.email}`,
+  phone: `tel:${company.phoneInternational}`,
+  whatsapp: `https://wa.me/${company.phoneInternational.replace(/\D/g, "")}`,
+  facebook: company.facebook,
 };
 
 export const navigationLinks = [

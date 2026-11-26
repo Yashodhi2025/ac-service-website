@@ -1,5 +1,7 @@
-import { Clock3, Mail, Phone } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
+import { FacebookIcon } from "@/components/ui/facebook-icon";
 import { company, contactLinks } from "@/config/site";
+import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import styles from "./header.module.css";
 
 export function ContactBar() {
@@ -10,15 +12,18 @@ export function ContactBar() {
           <Phone size={14} aria-hidden="true" />
           {company.phone}
         </a>
-        <a href={contactLinks.email} className={styles.contactItem}>
-          <Mail size={15} aria-hidden="true" />
-          <span className={styles.emailAddress}>{company.email}</span>
-          <span className={styles.emailLabel}>Email us</span>
+        <a href={contactLinks.whatsapp} className={styles.contactItem} target="_blank" rel="noopener noreferrer" aria-label={`Message ${company.name} on WhatsApp (opens in a new tab)`}>
+          <WhatsAppIcon width={16} height={16} />
+          WhatsApp
         </a>
-        <span className={`${styles.contactItem} ${styles.hours}`}>
-          <Clock3 size={15} aria-hidden="true" />
-          {company.workingHours}
+        <span className={`${styles.contactItem} ${styles.address}`}>
+          <MapPin size={15} aria-hidden="true" />
+          {company.address}
         </span>
+        <a href={contactLinks.facebook} className={styles.contactItem} target="_blank" rel="noopener noreferrer" aria-label={`${company.name} on Facebook (opens in a new tab)`}>
+          <FacebookIcon width={15} height={15} />
+          <span className={styles.socialLabel}>Facebook</span>
+        </a>
       </div>
     </div>
   );

@@ -1,16 +1,14 @@
 import Link from "next/link";
-import { Snowflake } from "lucide-react";
+import Image from "next/image";
 import { company } from "@/config/site";
 import styles from "./header.module.css";
 
 export function CompanyLogo() {
   return (
     <Link href="/" className={styles.logo} aria-label={`${company.name} home`}>
-      <span className={styles.logoMark}>
-        <Snowflake size={25} strokeWidth={1.6} aria-hidden="true" />
-      </span>
+      <Image src={company.logo} alt={`${company.shortName} snowflake and sun logo`} width={128} height={128} className={styles.logoImage} sizes="64px" loading="eager" />
       <span>
-        <span className={styles.wordmark}>{company.name}</span>
+        <span className={styles.wordmark}>{company.wordmark}</span>
         <span className={styles.descriptor}>{company.descriptor}</span>
       </span>
     </Link>

@@ -4,6 +4,7 @@
   --color-midnight-navy: #091b30;
   --color-ocean-blue: #123b5d;
   --color-electric-cyan: #00c7e8;
+  --color-solar-orange: #ff8c24;
   --color-ice-white: #eaf8fc;
   --color-pure-white: #ffffff;
 
@@ -39,6 +40,7 @@
 @layer base {
   html {
     scroll-padding-top: 11rem;
+    scroll-padding-bottom: 6rem;
   }
 
   body {
