@@ -19,6 +19,10 @@ export const contactLinks = {
   facebook: company.facebook,
 };
 
+export function getWhatsAppUrl(message: string) {
+  return `${contactLinks.whatsapp}?text=${encodeURIComponent(message)}`;
+}
+
 export const navigationLinks = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },

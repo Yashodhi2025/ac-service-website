@@ -1,0 +1,124 @@
+.section {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  padding-block: var(--spacing-section);
+  color: var(--color-ice-white);
+  background:
+    radial-gradient(ellipse at 84% 50%, rgb(0 199 232 / 9%), transparent 50%),
+    radial-gradient(ellipse at 0% 100%, rgb(255 140 36 / 4%), transparent 38%),
+    var(--color-midnight-navy);
+}
+
+.heading { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.5rem 3rem; margin-bottom: 2.5rem; }
+.eyebrow { display: flex; align-items: center; gap: 0.625rem; margin-bottom: 1rem; color: var(--color-electric-cyan); font-size: 0.875rem; font-weight: 500; }
+.eyebrow::before { content: ""; width: 1.5rem; height: 2px; background: var(--color-solar-orange); }
+.title { max-width: 19ch; font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 600; line-height: 1.15; letter-spacing: -0.04em; }
+.intro { max-width: 34ch; color: #bed7e5; font-size: 1rem; line-height: 1.8; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 2rem; }
+.choices { min-width: 0; border: 0; padding: 0; margin: 0; }
+.legend { margin-bottom: 1rem; color: #bed7e5; font-size: 0.875rem; }
+.optionGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+.choice { position: relative; display: block; min-width: 0; cursor: pointer; }
+.radio, .srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+.option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 100%;
+  min-height: 8rem;
+  padding: 1.125rem;
+  border: 1px solid rgb(234 248 252 / 13%);
+  border-radius: 1rem;
+  background: rgb(234 248 252 / 3%);
+  transition: border-color 220ms ease, background-color 220ms ease, box-shadow 220ms ease;
+}
+.problemIcon { flex-shrink: 0; color: #8ec9df; transition: color 220ms ease; }
+.optionLabel { font-size: 1rem; font-weight: 500; line-height: 1.4; }
+.radio:checked + .option { border-color: var(--color-electric-cyan); background: rgb(0 199 232 / 9%); box-shadow: 0 0 24px rgb(0 199 232 / 7%), inset 0 1px 0 rgb(0 199 232 / 12%); }
+.radio:checked + .option .problemIcon { color: var(--color-electric-cyan); }
+.radio:focus-visible + .option { outline: 2px solid var(--color-solar-orange); outline-offset: 4px; }
+.selectionCheck {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--color-electric-cyan);
+  color: var(--color-midnight-navy);
+}
+.choiceNote { margin-top: 1.25rem; color: #96b7cc; font-size: 0.875rem; line-height: 1.6; }
+.suggestion {
+  position: relative;
+  min-width: 0;
+  padding: 1.5rem;
+  border: 1px solid rgb(0 199 232 / 22%);
+  border-top-color: rgb(0 199 232 / 45%);
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, rgb(18 59 93 / 85%), #0c253c);
+  box-shadow: 0 20px 60px rgb(0 0 0 / 12%), 0 0 48px rgb(0 199 232 / 3%);
+}
+.suggestionHeader { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; color: var(--color-electric-cyan); font-size: 0.875rem; font-weight: 500; }
+.contentSlot { min-height: 17rem; }
+.selectedProblem { display: flex; align-items: center; gap: 0.625rem; margin-bottom: 1.25rem; color: #c3dfeb; font-size: 0.875rem; }
+.selectedProblem svg { flex-shrink: 0; color: var(--color-electric-cyan); }
+.serviceTitle { max-width: 20ch; font-size: clamp(1.75rem, 2.6vw, 2.25rem); font-weight: 600; line-height: 1.2; letter-spacing: -0.035em; }
+.explanation { margin-top: 1rem; color: #c3dbe8; font-size: 1rem; line-height: 1.8; }
+.assessmentNote { margin-top: 1.25rem; padding-left: 0.875rem; border-left: 2px solid rgb(255 140 36 / 70%); color: #bad1df; font-size: 0.875rem; line-height: 1.7; }
+.bookingButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 3.125rem;
+  margin-top: 1.5rem;
+  padding: 0.875rem 1rem;
+  border-radius: 999px;
+  background: var(--color-electric-cyan);
+  color: var(--color-midnight-navy);
+  font-size: 0.875rem;
+  font-weight: 650;
+  transition: box-shadow 200ms ease;
+}
+.bookingButton svg { flex-shrink: 0; }
+.bookingButton:hover { box-shadow: 0 5px 18px rgb(0 199 232 / 15%), inset 0 -2px 0 var(--color-solar-orange); }
+.bookingButton:focus-visible { outline: 2px solid var(--color-solar-orange); outline-offset: 4px; }
+
+@media (hover: hover) {
+  .choice:hover .option { border-color: rgb(0 199 232 / 55%); background: rgb(0 199 232 / 6%); }
+  .choice:hover .radio:checked + .option { border-color: var(--color-electric-cyan); background: rgb(0 199 232 / 12%); }
+}
+
+@media (min-width: 640px) {
+  .optionGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .option { min-height: 8.5rem; padding: 1.25rem; }
+  .suggestion { padding: 2rem; }
+  .contentSlot { min-height: 13.25rem; }
+}
+
+@media (min-width: 1024px) {
+  .layout { grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: 3rem; }
+  .optionGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .option { min-height: 8.25rem; }
+  .contentSlot { min-height: 16rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section * { transition: none; }
+}
