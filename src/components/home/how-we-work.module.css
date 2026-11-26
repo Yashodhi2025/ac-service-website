@@ -1,0 +1,113 @@
+.section {
+  padding-block: var(--spacing-section);
+  color: var(--color-midnight-navy);
+  background: var(--color-ice-white);
+}
+
+.heading { max-width: 48rem; margin-inline: auto; margin-bottom: 3rem; text-align: center; }
+.eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  margin-bottom: 0.875rem;
+  color: var(--color-ocean-blue);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.eyebrow::before { content: ""; width: 1.5rem; height: 2px; background: var(--color-electric-cyan); }
+.title { font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.18; font-weight: 650; letter-spacing: -0.04em; text-wrap: balance; }
+.timeline {
+  --icon-size: 4.5rem;
+  --step-gap: 2.5rem;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--step-gap);
+  list-style: none;
+}
+.step { position: relative; display: grid; grid-template-columns: var(--icon-size) minmax(0, 1fr); align-items: start; gap: 1.25rem; min-width: 0; }
+.track {
+  position: absolute;
+  z-index: -1;
+  top: calc(var(--icon-size) / 2);
+  left: calc(var(--icon-size) / 2);
+  width: 2px;
+  height: calc(100% + var(--step-gap));
+  background: rgb(18 59 93 / 13%);
+}
+.fill { position: absolute; inset: 0; display: block; background: var(--color-electric-cyan); transform-origin: center top; }
+.iconRing {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  border: 1px solid rgb(0 199 232 / 35%);
+  border-radius: 50%;
+  background: var(--color-ice-white);
+  box-shadow: 0 0 0 6px var(--color-ice-white);
+  transition: transform 250ms ease, border-color 250ms ease, box-shadow 250ms ease;
+}
+.iconCircle {
+  display: grid;
+  place-items: center;
+  width: calc(var(--icon-size) - 0.875rem);
+  height: calc(var(--icon-size) - 0.875rem);
+  border-radius: 50%;
+  background: var(--color-midnight-navy);
+  color: var(--color-electric-cyan);
+}
+.iconCircle svg { width: 2rem; height: 2rem; }
+.number {
+  position: absolute;
+  right: -0.125rem;
+  bottom: -0.125rem;
+  display: grid;
+  place-items: center;
+  width: 1.875rem;
+  height: 1.875rem;
+  border: 1px solid rgb(255 140 36 / 50%);
+  border-radius: 50%;
+  background: var(--color-pure-white);
+  color: var(--color-midnight-navy);
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 650;
+}
+.stepCopy { min-width: 0; padding-top: 0.375rem; }
+.stepTitle { font-size: 1.25rem; font-weight: 650; line-height: 1.3; letter-spacing: -0.025em; }
+.description { max-width: 30ch; margin-top: 0.75rem; color: var(--color-ocean-blue); font-size: 1rem; line-height: 1.8; }
+.description a { text-decoration: underline; text-decoration-color: rgb(0 199 232 / 65%); text-underline-offset: 4px; transition: text-decoration-color 180ms ease; }
+.description a:hover { text-decoration-color: var(--color-solar-orange); }
+.description a:focus-visible { outline: 2px solid var(--color-ocean-blue); outline-offset: 4px; border-radius: 2px; }
+.step:focus-within .iconRing { transform: translateY(-3px); border-color: var(--color-solar-orange); box-shadow: 0 0 0 6px var(--color-ice-white), 0 6px 28px rgb(0 199 232 / 12%); }
+
+@media (hover: hover) {
+  .step:hover .iconRing { transform: translateY(-3px); border-color: var(--color-solar-orange); box-shadow: 0 0 0 6px var(--color-ice-white), 0 6px 28px rgb(0 199 232 / 12%); }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .timeline { --icon-size: 5.5rem; max-width: 38rem; margin-inline: auto; }
+  .step { gap: 2rem; }
+  .iconCircle svg { width: 2.25rem; height: 2.25rem; }
+}
+
+@media (min-width: 1024px) {
+  .heading { margin-bottom: 4rem; }
+  .timeline { --icon-size: 7rem; --step-gap: 1.5rem; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .step { display: block; text-align: center; }
+  .track { left: 50%; width: calc(100% + var(--step-gap)); height: 2px; }
+  .fill { transform-origin: left center; }
+  .iconRing { margin-inline: auto; }
+  .iconCircle svg { width: 2.5rem; height: 2.5rem; }
+  .number { right: 0; bottom: 0; width: 2rem; height: 2rem; font-size: 1rem; }
+  .stepCopy { padding-top: 1.75rem; }
+  .description { max-width: 26ch; margin-inline: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section * { transition: none; }
+  .step:is(:hover, :focus-within) .iconRing { transform: none; }
+}
