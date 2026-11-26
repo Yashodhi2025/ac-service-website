@@ -1,0 +1,6 @@
+Asset: public/images/ac-unit.png
+Generated with: built-in image_gen tool, transparent_background=true
+Format: 2048 x 768 PNG with alpha transparency
+
+Final prompt:
+Create one premium photorealistic product cutout for an air-conditioning service website. Subject: a large modern white wall-mounted indoor split air conditioner, no brand, no text, no logo. Long slim horizontal body, elegant softly rounded edges, realistic satin white plastic, subtle panel seams, open dark lower vent and visible horizontal louvers. View almost straight-on with a slight view of the right side and underside, suitable for positioning in the right half of a website hero. Entire unit fully visible, centered and generously filling a wide landscape canvas, with modest transparent margins. Clean studio lighting and subtle cool reflections on the white body, sharp detailed product photography. Genuinely transparent background with alpha, no wall, no room, no floor, no cast background shadow, no pedestal, no airflow graphics, no mist, no glow, no decorative elements. The clean silhouette must composite beautifully on a dark navy background. Output only the isolated realistic air conditioner.

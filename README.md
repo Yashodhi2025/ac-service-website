@@ -1,6 +1,6 @@
 # A/C Service Website
 
-A custom Next.js App Router foundation for a premium air conditioning service company. A responsive navigation header is integrated in the root layout. The homepage and navigation destinations are minimal placeholders; the hero and footer have not been built. No website templates are used.
+A custom Next.js App Router website for a premium air conditioning service company. A responsive navigation header is integrated in the root layout, and the homepage has a custom animated hero. Navigation destinations remain minimal placeholders; no other homepage sections or footer have been built. No website templates are used.
 
 ## Development
 
@@ -28,6 +28,12 @@ Empty component folders are tracked with `.gitkeep` until components are added.
 `SiteHeader` combines a contact bar, temporary logo, desktop navigation, Services disclosure, booking link, and animated mobile navigation. Header components and scoped styles live in `src/components/layout`. Navigation is sticky, and menus support keyboard navigation, Escape, outside clicks, focus leaving the navigation, and reduced motion. The mobile panel scrolls within the available viewport.
 
 Replace the temporary Aeris Air identity, placeholder phone, `.example` email, and hours in `src/config/site.ts` before launch. The booking button currently opens the Contact placeholder; no booking form is implemented. Simple destination pages keep all navigation and service anchor links usable during development. Replace these placeholders with full routes as the site grows.
+
+## Homepage hero
+
+The custom hero lives in `src/components/home`, with a 580px minimum desktop height and a stacked mobile layout. GSAP handles entrance effects and the SVG airflow in `src/components/animations`; Motion supplies the floating A/C unit and button interactions. Continuous motion pauses offscreen and in hidden tabs. Reduced motion preferences disable the entrance, floating, and moving airflow effects. The temperature badge is an illustrative comfort setting, not live telemetry.
+
+The transparent A/C product image is bundled at `public/images/ac-unit.png` and served through `next/image` with responsive sizing and preload. It was generated with the built-in image generation tool; the final prompt is in `docs/assets/ac-unit.txt`. No remote image service is needed. The booking CTA uses the shared company configuration; Explore Services opens the existing Services placeholder.
 
 ## Design foundation
 
