@@ -1,6 +1,6 @@
 # A/C Service Website
 
-A custom Next.js App Router foundation for a premium air conditioning service company. The homepage is a minimal placeholder; the navbar, hero, and footer have not been built. No website templates are used.
+A custom Next.js App Router foundation for a premium air conditioning service company. A responsive navigation header is integrated in the root layout. The homepage and navigation destinations are minimal placeholders; the hero and footer have not been built. No website templates are used.
 
 ## Development
 
@@ -19,8 +19,15 @@ Open http://localhost:3000. Run `npm run build` to validate a production build, 
 - `src/components/services`: service components.
 - `src/components/animations`: reusable animation components.
 - `src/components/ui`: shared interface primitives.
+- `src/config/site.ts`: temporary company identity, contacts, booking destination, navigation, and services.
 
 Empty component folders are tracked with `.gitkeep` until components are added.
+
+## Header
+
+`SiteHeader` combines a contact bar, temporary logo, desktop navigation, Services disclosure, booking link, and animated mobile navigation. Header components and scoped styles live in `src/components/layout`. Navigation is sticky, and menus support keyboard navigation, Escape, outside clicks, focus leaving the navigation, and reduced motion. The mobile panel scrolls within the available viewport.
+
+Replace the temporary Aeris Air identity, placeholder phone, `.example` email, and hours in `src/config/site.ts` before launch. The booking button currently opens the Contact placeholder; no booking form is implemented. Simple destination pages keep all navigation and service anchor links usable during development. Replace these placeholders with full routes as the site grows.
 
 ## Design foundation
 

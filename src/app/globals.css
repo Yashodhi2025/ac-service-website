@@ -37,6 +37,10 @@
 }
 
 @layer base {
+  html {
+    scroll-padding-top: 11rem;
+  }
+
   body {
     min-height: 100svh;
     background: var(--background);

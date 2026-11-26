@@ -1,0 +1,233 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 4px 24px rgb(9 27 48 / 5%);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.skipLink {
+  position: absolute;
+  top: 0.5rem;
+  left: var(--spacing-gutter);
+  z-index: 2;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--color-electric-cyan);
+  color: var(--color-midnight-navy);
+  transform: translateY(-200%);
+}
+
+.skipLink:focus { transform: translateY(0); }
+
+.contactBar {
+  background: var(--color-midnight-navy);
+  color: var(--color-ice-white);
+}
+
+.contactInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  padding-block: 0.5rem;
+}
+
+.contactItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.contactItem svg { flex-shrink: 0; color: var(--color-electric-cyan); }
+.contactItem:is(a) { transition: color 180ms ease; }
+.contactItem:is(a):hover { color: var(--color-electric-cyan); }
+.contactItem:is(a):focus-visible { outline-color: var(--color-electric-cyan); }
+.emailAddress { display: none; }
+.hours { flex-basis: 100%; justify-content: center; }
+
+.mainNavigation {
+  position: relative;
+  border-bottom: 1px solid rgb(18 59 93 / 9%);
+  background: var(--color-pure-white);
+}
+
+.navInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 4.75rem;
+}
+
+.logo { display: inline-flex; align-items: center; gap: 0.75rem; flex-shrink: 0; }
+.logoMark {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.875rem;
+  background: var(--color-midnight-navy);
+  color: var(--color-electric-cyan);
+}
+.wordmark {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.375rem;
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+.descriptor { display: block; margin-top: 0.125rem; color: var(--color-ocean-blue); font-size: 0.875rem; }
+.desktopNav, .desktopBooking { display: none; }
+.desktopLinks { display: flex; align-items: center; gap: 1rem; }
+.navLink {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--color-ocean-blue);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 180ms ease;
+}
+.navLink:hover, .navLink[aria-current="page"] { color: var(--color-midnight-navy); }
+.navLink[aria-current="page"] { font-weight: 650; }
+.desktopLinks .navLink::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0.125rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--color-electric-cyan);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+}
+.desktopLinks .navLink:hover::after,
+.desktopLinks .navLink[aria-current="page"]::after { transform: scaleX(1); }
+.servicesItem { position: relative; }
+.servicesControl { display: flex; align-items: center; gap: 0.125rem; }
+.servicesToggle {
+  display: grid;
+  place-items: center;
+  min-width: 1.75rem;
+  min-height: 2.75rem;
+  border-radius: 0.5rem;
+  color: var(--color-ocean-blue);
+  cursor: pointer;
+  transition: background-color 180ms ease;
+}
+.servicesToggle:hover { background: var(--color-ice-white); }
+.servicesToggle svg { transition: transform 180ms ease; }
+.chevronOpen { transform: rotate(180deg); }
+.servicesPanel {
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  left: -6rem;
+  width: 39rem;
+  max-width: calc(100vw - 3rem);
+}
+.servicesSurface {
+  padding: 1.25rem;
+  border: 1px solid rgb(18 59 93 / 10%);
+  border-radius: 1.125rem;
+  background: var(--color-pure-white);
+  box-shadow: 0 16px 48px rgb(9 27 48 / 12%);
+}
+.dropdownLabel { padding-inline: 0.5rem; margin-bottom: 0.75rem; color: var(--color-ocean-blue); font-weight: 600; }
+.serviceGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.25rem; }
+.serviceLink {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 0.5rem;
+  border-radius: 0.75rem;
+  transition: background-color 180ms ease;
+}
+.serviceLink:hover { background: var(--color-ice-white); }
+.serviceIcon {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  border-radius: 0.625rem;
+  background: var(--color-ice-white);
+  color: var(--color-ocean-blue);
+}
+.serviceName { display: block; font-weight: 600; line-height: 1.4; }
+.serviceDescription { display: block; margin-top: 0.25rem; color: var(--color-ocean-blue); font-size: 0.875rem; line-height: 1.5; }
+.bookButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  min-height: 2.875rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  background: var(--color-electric-cyan);
+  color: var(--color-midnight-navy);
+  font-size: 0.875rem;
+  font-weight: 650;
+  white-space: nowrap;
+  transition: background-color 200ms ease, box-shadow 200ms ease;
+}
+.bookButton:hover { background: color-mix(in srgb, var(--color-electric-cyan) 85%, var(--color-ice-white)); box-shadow: 0 5px 18px rgb(0 199 232 / 22%); }
+.mobileToggle {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgb(18 59 93 / 12%);
+  border-radius: 0.75rem;
+  color: var(--color-midnight-navy);
+  cursor: pointer;
+}
+.mobileToggle:hover { background: var(--color-ice-white); }
+.mobilePanel {
+  position: absolute;
+  top: 100%;
+  inset-inline: 0;
+  overflow: hidden;
+  background: var(--color-pure-white);
+  box-shadow: 0 16px 24px rgb(9 27 48 / 8%);
+}
+.mobileScroll { max-height: calc(100dvh - 10rem); overflow-y: auto; overscroll-behavior: contain; }
+.mobileLinks { padding-block: 0.75rem; }
+.mobileLinks > li { border-bottom: 1px solid rgb(18 59 93 / 7%); }
+.mobileLinks .navLink { flex: 1; min-height: 3.25rem; padding-inline: 0.75rem; border-radius: 0.5rem; font-size: 1rem; }
+.mobileLinks .navLink:hover, .mobileLinks .navLink[aria-current="page"] { background: var(--color-ice-white); }
+.mobileServices .servicesToggle { min-width: 3rem; min-height: 3rem; }
+.mobileServices .servicesPanel { position: static; width: auto; max-width: none; overflow: hidden; }
+.mobileServices .servicesSurface { padding: 0.5rem 0 1rem; border: 0; border-radius: 0; box-shadow: none; }
+.mobileServices .dropdownLabel { display: none; }
+.mobileServices .serviceGrid { grid-template-columns: 1fr; }
+.mobileServices .serviceDescription { display: none; }
+.mobileServices .serviceLink { align-items: center; padding: 0.625rem 0.75rem; }
+.mobileBooking { display: grid; gap: 1rem; padding-block: 0.75rem 1.5rem; }
+.mobilePhone { display: flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 2.75rem; color: var(--color-ocean-blue); }
+
+@media (min-width: 640px) {
+  .contactInner { justify-content: flex-start; }
+  .emailAddress { display: inline; }
+  .emailLabel { display: none; }
+  .hours { margin-left: auto; flex-basis: auto; }
+}
+
+@media (min-width: 1024px) {
+  .desktopNav, .desktopBooking { display: block; }
+  .desktopNav { margin-left: auto; }
+  .mobileToggle, .mobilePanel { display: none; }
+}
+
+@media (min-width: 1280px) {
+  .desktopLinks { gap: 1.5rem; }
+  .navInner { gap: 2rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header *, .header *::after { transition: none; }
+}

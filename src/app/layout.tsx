@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { SiteHeader } from "@/components/layout/site-header";
+import { company } from "@/config/site";
 import "./globals.css";
 
 const inter = localFont({
@@ -17,7 +19,7 @@ const manrope = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Premium A/C Service",
+  title: `${company.name} | Premium A/C Service`,
   description: "Premium air conditioning service and care.",
 };
 
@@ -27,7 +29,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${inter.variable} ${manrope.variable} antialiased`}
     >
-      <body>{children}</body>
+      <body>
+        <SiteHeader />
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   turbopack: {
     rules: {
-      "*.css": {
+      // Keep component CSS Modules and next/font styles on Next.js's native pipeline.
+      "globals.css": {
         loaders: ["@tailwindcss/turbopack"],
         as: "*.css",
       },
