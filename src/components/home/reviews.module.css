@@ -1,0 +1,8 @@
+.review { min-width:0; border-left:2px solid var(--color-electric-cyan); padding-left:1.5rem; align-self:center; }
+.quoteIcon { color:var(--color-solar-orange); margin-bottom:1rem; }
+.review h3 { font-size:1.5rem; }.review > p { color:var(--color-ocean-blue); line-height:1.85; margin-block:1rem; }
+.review blockquote { font-family:var(--font-heading); font-size:clamp(1.375rem,2.25vw,2rem); line-height:1.55; overflow-wrap:anywhere; }
+.author { font-weight:600; margin-block:1.5rem 1rem; }.author span { display:block; color:var(--color-ocean-blue); font-size:.875rem; font-weight:400; }
+.stars { display:flex; gap:.25rem; color:var(--color-ocean-blue); margin-bottom:1rem; }
+.controls { display:flex; align-items:center; gap:1rem; margin-top:1.5rem; font-size:.875rem; color:var(--color-ocean-blue); }
+.controls button { display:grid; place-items:center; border:1px solid rgb(18 59 93 / 25%); border-radius:50%; width:2.75rem; height:2.75rem; cursor:pointer; }.controls button:hover {border-color:var(--color-solar-orange);}

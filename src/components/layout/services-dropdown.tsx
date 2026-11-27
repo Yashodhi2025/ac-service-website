@@ -3,7 +3,7 @@
 import Link from "next/link";
 import {
   Building2, CalendarCheck, ChevronDown, Droplets,
-  Fan, Move, Snowflake, Sparkles, Wrench,
+  Fan, Move, Snowflake, Sparkles, Wrench, Cpu,
 } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useId, useRef, useState } from "react";
@@ -19,6 +19,7 @@ const serviceIcons = {
   maintenance: CalendarCheck,
   commercial: Building2,
   relocation: Move,
+  pcb: Cpu,
 };
 
 type ServicesDropdownProps = {
@@ -115,7 +116,7 @@ export function ServicesDropdown({ mobile = false, active, onNavigate }: Service
               const Icon = serviceIcons[service.icon];
               return (
                 <li key={service.id}>
-                  <Link href={`/services#${service.id}`} className={styles.serviceLink} onClick={navigate}>
+                  <Link href={service.href} className={styles.serviceLink} onClick={navigate}>
                     <span className={styles.serviceIcon}><Icon size={19} strokeWidth={1.7} aria-hidden="true" /></span>
                     <span>
                       <span className={styles.serviceName}>{service.name}</span>

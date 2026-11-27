@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { ExpertiseService } from "@/config/expertise";
+import { getServiceHref } from "@/data/services";
 import styles from "./expertise.module.css";
 
 export function ServiceTile({ service }: { service: ExpertiseService }) {
@@ -11,7 +12,7 @@ export function ServiceTile({ service }: { service: ExpertiseService }) {
   return (
     <li className={`${styles.tile} ${styles[service.layout]}`} data-scroll-reveal>
       <Link
-        href={`/services#${service.id}`}
+        href={getServiceHref(service.id)}
         className={styles.tileLink}
         aria-labelledby={titleId}
         aria-describedby={descriptionId}

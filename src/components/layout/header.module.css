@@ -123,6 +123,9 @@
   left: -6rem;
   width: 39rem;
   max-width: calc(100vw - 3rem);
+  max-height: calc(100dvh - 9rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 .servicesSurface {
   padding: 1.25rem;
@@ -195,7 +198,7 @@
 .mobileLinks .navLink { flex: 1; min-height: 3.25rem; padding-inline: 0.75rem; border-radius: 0.5rem; font-size: 1rem; }
 .mobileLinks .navLink:hover, .mobileLinks .navLink[aria-current="page"] { background: var(--color-ice-white); }
 .mobileServices .servicesToggle { min-width: 3rem; min-height: 3rem; }
-.mobileServices .servicesPanel { position: static; width: auto; max-width: none; overflow: hidden; }
+.mobileServices .servicesPanel { position: static; width: auto; max-width: none; max-height: none; overflow: hidden; }
 .mobileServices .servicesSurface { padding: 0.5rem 0 1rem; border: 0; border-radius: 0; box-shadow: none; }
 .mobileServices .dropdownLabel { display: none; }
 .mobileServices .serviceGrid { grid-template-columns: 1fr; }

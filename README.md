@@ -1,83 +1,62 @@
 # Earth Coolman Engineers (ECME)
 
-A custom Next.js App Router website for a premium air conditioning service company. A responsive navigation header is integrated in the root layout, and the homepage has a custom animated hero, an Our Expertise services grid, an interactive A/C problem finder, and a How We Work timeline. Other navigation destinations remain minimal placeholders; no other homepage sections or footer have been built. No website templates are used.
+A standalone custom Next.js website with Manrope/Inter typography and midnight navy, cyan, ice-white and solar-orange branding. No editable website template is used.
 
-## Development
+## Run and verify
 
 ```sh
 npm ci
 npm run dev
+npm run lint
+npm run build
+npx tsc --noEmit
+npm start
 ```
 
-Open http://localhost:3000. Run `npm run build` to validate a production build, and `npm start` to serve it.
+The homepage preserves the original hero, Our Expertise grid, A/C problem finder and How We Work timeline. It adds Why Choose ECME, an honest projects preview, customer reviews, FAQs and a final booking CTA. The global header, footer and floating WhatsApp control are shared across pages.
 
-## Structure
+## Routes
 
-- `src/app`: routes, metadata, font loading, and global styles.
-- `src/components/layout`: shared page layout components.
-- `src/components/home`: homepage components.
-- `src/components/services`: service components.
-- `src/components/animations`: reusable animation components.
-- `src/components/ui`: shared interface primitives.
-- `src/config/site.ts`: company identity, verified contacts, booking destination, navigation, and services.
+- `/services`: catalogue and category navigation.
+- `/services/[slug]`: nine individual service guides with scope, symptoms, process, benefits, FAQs and specific booking/inquiry links.
+- `/about`: company overview, mission, vision, values, technical approach and permission-aware team presentation.
+- `/projects`: category filters, empty state, project lightbox and reusable before/after comparison.
+- `/faq`: search, category filters and animated accessible accordions.
+- `/contact`: verified contacts, address-search link and validated WhatsApp inquiry form.
+- `/book-service`: five-step validated service request. A `?service=slug` query preselects a service.
 
-Empty component folders are tracked with `.gitkeep` until components are added.
+## Central content
 
-## Header
+- `src/config/site.ts`: owner-supplied company identity and contacts. No email or hours are invented.
+- `src/data/services.ts`: nine configurable services. `enabled` controls publication; `confirmScope` flags additional work to discuss with the company.
+- `src/data/faqs.ts`: shared FAQ answers, categories and service associations.
+- `src/data/company-content.ts`: benefits and the genuine projects, reviews and team profiles to publish.
+- `src/config/expertise.ts` and `ac-problems.ts`: existing homepage editorial content and suggestions.
 
-`SiteHeader` combines a contact bar, the supplied ECME logo, desktop navigation, Services disclosure, booking link, and animated mobile navigation. Header components and scoped styles live in `src/components/layout`. Navigation is sticky, and menus support keyboard navigation, Escape, outside clicks, focus leaving the navigation, and reduced motion. The mobile panel scrolls within the available viewport.
+Projects, reviews and employee profiles are intentionally empty until genuine, permission-cleared material is supplied. The UI supports populated data, including gallery filters, modal viewing, image comparison and carousel controls. Generated photos are labelled as illustrations and never used as completed ECME projects or employee portraits.
 
-Company details supplied by the owner are centralized in `src/config/site.ts`: Earth Coolman Engineers, phone/WhatsApp `0719701510`, address `No.121/11, Siyabalagoada, Polgasowita`, and the supplied Facebook link. Telephone links use `+94719701510`; WhatsApp links use `https://wa.me/94719701510`. No email or opening hours are published. The booking button opens the existing Contact page with functional phone, WhatsApp, and Facebook links; no booking form is implemented. Other destination pages remain placeholders. A floating WhatsApp link is available throughout the site.
+## Forms and privacy
 
-The original supplied logo is saved in `public/images/brand/ecme-logo-original.jpeg`. The transparent navbar asset and favicon variants are derived from the original pixels using `scripts/prepare-brand-assets.mjs`, following the owner's explicit approval of pixel-based cleanup. No redrawn AI alternative is used. Asset paths and preparation details are recorded in `docs/assets/ecme-logo.txt`.
+React Hook Form and Zod validate both forms. The booking flow collects service, unit details, customer contacts/location, a preferred date and acknowledgement. Dates use Asia/Colombo time and must be today or later.
 
-## Homepage hero
+Forms prepare an encoded WhatsApp draft for the centralized number. Users review it and explicitly open WhatsApp to send it. Nothing is automatically sent, no backend is present, no form information is persisted, and no appointment is represented as confirmed. Preferred dates, availability and scope require direct company confirmation.
 
-The custom hero lives in `src/components/home`, with a 580px minimum desktop height and a stacked mobile layout. GSAP handles entrance effects and the SVG airflow in `src/components/animations`; Motion supplies the floating A/C unit and button interactions. Continuous motion pauses offscreen and in hidden tabs. Reduced motion preferences disable the entrance, floating, and moving airflow effects. The temperature badge is an illustrative comfort setting, not live telemetry.
+## Media and motion
 
-The transparent A/C product image is bundled at `public/images/ac-unit.png` and served through `next/image` with responsive sizing and preload. It was generated with the built-in image generation tool; the final prompt is in `docs/assets/ac-unit.txt`. No remote image service is needed. The booking CTA uses the shared company configuration; Explore Services opens the existing Services placeholder.
+Images are local WebP assets, except the preserved transparent ECME logo and original hero cutout. The original logo and exact pixel cleanup script remain in `public/images/brand` and `scripts/prepare-brand-assets.mjs`. Photo prompts/provenance are in `docs/assets`.
 
-## Our Expertise
+GSAP/ScrollTrigger handle scoped scroll reveals, the process timeline, airflow and restrained photo parallax. Motion supplies selection, accordion, carousel and filter transitions. Native radio controls, labelled forms, native modal focus behaviour, keyboard controls and reduced-motion preferences are supported. The skip link appears only on focus.
 
-`src/components/services` contains the asymmetric photo bento and reusable `ServiceTile`. Installation and repair are the larger featured tiles; routine and full servicing use compact horizontal treatments, and relocation and PCB repair complete the grid. The layout changes to two columns on tablets and one on phones, preserving its visual and keyboard reading order.
+## SEO and deployment configuration
 
-Service names, descriptions, image paths, and destination anchors are in `src/config/expertise.ts`. The six illustrative generated photographs are local WebP files in `public/images/services`, lazy-loaded with responsive `next/image` sizing. The built-in image generation prompts are recorded in `docs/assets/expertise-images.txt`. The photos illustrate services and are not company project records.
+Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL` to the real deployed public origin before the production build. That enables canonical URLs and populated sitemap entries without inventing a company domain. Page titles/descriptions, FAQ structured data, verified LocalBusiness details, robots, icons and image alt text are included.
 
-`ScrollReveal` in `src/components/animations` runs each entrance once using scoped GSAP ScrollTriggers, with cleanup on unmount and reduced motion support. Image zoom and arrow transitions also work on keyboard focus and respect reduced motion. Tile links and View All Services lead to the existing Services destination, including an added PCB repair anchor. Header and hero components are preserved.
+This repository is prepared locally; no hosting or deployment is implied.
 
-## A/C problem finder
+## Content still needed from the owner
 
-`src/components/home/ac-problem-finder.tsx` provides six single-select problems with native radio keyboard controls and a live announcement of the suggested service. Suggested services and explanations are in `src/config/ac-problems.ts`. Copy makes clear that these are service suggestions, with the cause and appropriate work to be confirmed through assessment.
-
-Each selection updates a WhatsApp booking link generated by the shared `getWhatsAppUrl` helper in `src/config/site.ts`. The encoded draft includes the selected problem and the company name, using the existing centralized ECME number. Opening the link prepares a conversation; it does not automatically send a message. Motion handles selection and content transitions, with reduced motion support. Existing GSAP scroll reveals handle the section entrance.
-
-## How We Work
-
-`src/components/home/how-we-work.tsx` presents the four service steps as an ordered list with circular Lucide icons and numbered badges. The connected timeline is horizontal from 1024px and vertical below that breakpoint, with scoped CSS in `how-we-work.module.css`. No rectangular cards are used.
-
-GSAP fills the three connecting segments in sequence with scroll-linked progress. The scroll range is clamped to the page bounds so the final segment can fill at the end of the homepage. Desktop entrances are staggered; mobile steps reveal as they enter view. Breakpoint changes rebuild the animation in a scoped match-media context, and unmounting reverts it. Reduced motion shows a complete static timeline and disables hover movement. Contact and WhatsApp inquiry links use the centralized company configuration.
-
-## Design foundation
-
-`src/app/globals.css` defines Tailwind v4 theme tokens, also available as CSS custom properties:
-
-| Token | Value |
-| --- | --- |
-| `midnight-navy` | `#091B30` |
-| `ocean-blue` | `#123B5D` |
-| `electric-cyan` | `#00C7E8` |
-| `solar-orange` | `#FF8C24` |
-| `ice-white` | `#EAF8FC` |
-| `pure-white` | `#FFFFFF` |
-
-Use these in utilities such as `bg-midnight-navy`, `text-ocean-blue`, and `border-electric-cyan`. Cyan remains the dominant accent; solar orange adds restrained hover borders, highlights, and a faint hero gradient. The default surface is ice white with midnight navy text.
-
-Manrope is the heading font (`font-heading`); Inter is the body font (`font-sans`). Both are bundled variable fonts loaded with `next/font/local` and swap display, so builds and page loads do not need Google Fonts access. Font files and their SIL Open Font Licenses are stored in `src/app/fonts` and sourced from the official Google Fonts repository.
-
-Typography uses fluid `clamp()` values from `text-body` through `text-h1` to `text-h6`. Heading elements receive Manrope and their corresponding sizes automatically.
-
-Spacing follows a 4px scale (for example, `gap-4` is 1rem). Use `px-gutter` for responsive horizontal padding, `py-section` for responsive section spacing, and `page-container` for a centered container with an 80rem maximum width and responsive gutters.
-
-## Available libraries
-
-GSAP, Motion (`motion/react`), Lucide React, React Hook Form, Zod, and `@hookform/resolvers` are installed for future work. Add interactive components behind a `"use client"` boundary as needed. Animation code should respect reduced motion preferences and clean up on unmount.
+- Genuine project photos, categories, descriptions and publishing permission; before/after pairs if available.
+- Genuine customer reviews with source details and permission.
+- Approved employee names, roles, biographies and photo consent, if profiles are wanted.
+- Approval of mission/vision wording and additional service scope/availability.
+- The real production domain for canonical URLs and the sitemap.

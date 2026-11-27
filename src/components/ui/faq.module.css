@@ -1,0 +1,13 @@
+.accordion { border-top:1px solid rgb(18 59 93 / 18%); }
+.item { border-bottom:1px solid rgb(18 59 93 / 18%); }
+.item h3 { font-size:1rem; line-height:1.6; }
+.item button { width:100%; min-height:4.5rem; padding:1.25rem 0; display:flex; justify-content:space-between; align-items:center; gap:1.5rem; text-align:left; font-weight:600; cursor:pointer; }
+.item button svg { flex-shrink:0; color:var(--color-ocean-blue); transition:transform .2s; }
+.rotated { transform:rotate(45deg); }
+.answer { overflow:hidden; }
+.answer p { padding-bottom:1.5rem; max-width:78ch; color:var(--color-ocean-blue); font-size:1rem; line-height:1.85; }
+.controls { display:grid; gap:1.5rem; margin-bottom:2rem; }
+.search { display:grid; gap:.625rem; max-width:42rem; font-size:.875rem; font-weight:600; }
+.search input { width:100%; padding:1rem 1.25rem; border:1px solid rgb(18 59 93 / 25%); border-radius:999px; background:white; font-size:1rem; font-weight:400; }
+.count { font-size:.875rem; color:var(--color-ocean-blue); margin-bottom:1rem; }
+@media(prefers-reduced-motion:reduce){.item button svg{transition:none;}}

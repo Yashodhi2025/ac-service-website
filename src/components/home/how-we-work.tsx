@@ -136,7 +136,7 @@ export function HowWeWork() {
                 <h3 className={styles.stepTitle}>{title}</h3>
                 <p className={styles.description}>
                   {index === 0 ? (
-                    <><Link href={company.bookingHref}>Contact us</Link> or send a <a href={inquiryUrl} target="_blank" rel="noopener noreferrer">WhatsApp inquiry</a>.</>
+                    <><Link href="/contact">Contact us</Link> or send a <a href={inquiryUrl} target="_blank" rel="noopener noreferrer">WhatsApp inquiry</a>.</>
                   ) : description}
                 </p>
               </div>

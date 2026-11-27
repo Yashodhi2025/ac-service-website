@@ -1,0 +1,5 @@
+Local asset: public/images/technician-illustration.webp
+Generated with the built-in imagegen tool. Fictional illustrative photography, not an ECME employee or completed project. Encoded as WebP for delivery.
+
+Final prompt:
+Create one premium photorealistic editorial photograph for an air-conditioning service website, portrait 4:5 composition. A fictional South Asian adult technician in a plain navy short-sleeved work shirt, focused in profile while carefully inspecting a modern white wall-mounted air conditioner in a bright clean interior. Technician and hands visible naturally, tidy unbranded tools on a small service tray, no posed smile, no written text, no logos, no badges or certificates. Soft natural daylight, cool white and ocean-blue tones with a tiny warm reflection, realistic skin and materials, credible careful work, generous composition with the white A/C in the upper third and technician to the middle right, softly blurred workshop/living space behind. Authentic editorial photo quality, no collage, no graphics, no statistics. This image illustrates a service concept; it must not suggest an actual named employee or an actual company project.

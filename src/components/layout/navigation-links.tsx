@@ -15,7 +15,7 @@ export function NavigationLinks({ mobile = false, onNavigate }: {
   return (
     <ul className={mobile ? styles.mobileLinks : styles.desktopLinks}>
       {navigationLinks.map((link) => link.href === "/services" ? (
-        <ServicesDropdown key={link.href} mobile={mobile} active={pathname === link.href} onNavigate={onNavigate} />
+        <ServicesDropdown key={link.href} mobile={mobile} active={pathname === link.href || pathname.startsWith("/services/")} onNavigate={onNavigate} />
       ) : (
         <li key={link.href}>
           <Link href={link.href} className={styles.navLink} onClick={onNavigate} aria-current={pathname === link.href ? "page" : undefined}>

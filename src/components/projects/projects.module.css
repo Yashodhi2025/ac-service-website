@@ -1,0 +1,26 @@
+.gallery { display:grid; grid-template-columns:minmax(0,1fr); gap:2rem 1.5rem; margin-top:2rem; }
+.projectButton { width:100%; text-align:left; cursor:pointer; }
+.projectImage { position:relative; display:block; height:20rem; overflow:hidden; border-radius:1.25rem; }
+.projectImage img { object-fit:cover; transition:transform .6s; }
+.projectButton:hover img { transform:scale(1.05); }
+.projectCategory { display:block; color:var(--color-ocean-blue); font-size:.875rem; margin-top:1rem; }
+.projectTitle { display:block; font-family:var(--font-heading); font-size:1.5rem; font-weight:600; margin-top:.5rem; }
+.dialog { width:min(70rem,calc(100% - 2rem)); max-height:90dvh; padding:0; border:0; border-radius:1.25rem; margin:auto; background:var(--color-ice-white); color:var(--color-midnight-navy); }
+.dialog::backdrop { background:rgb(9 27 48 / 85%); }
+.dialogInner { padding:1.5rem; overflow:auto; }
+.dialogHeader { display:flex; align-items:center; justify-content:space-between; gap:1.5rem; margin-bottom:1.5rem; }
+.dialogHeader h2 { font-size:clamp(1.5rem,3vw,2.25rem); margin-top:.25rem; }
+.iconButton { display:grid; place-items:center; width:2.75rem; height:2.75rem; border:1px solid rgb(18 59 93 / 25%); border-radius:50%; cursor:pointer; flex-shrink:0; }
+.iconButton:hover { background:white; border-color:var(--color-solar-orange); }
+.lightboxImage { position:relative; height:min(55dvh,36rem); }
+.lightboxImage img { object-fit:contain; }
+.comparison { position:relative; width:100%; height:clamp(15rem,50vw,34rem); overflow:hidden; border-radius:1rem; }
+.comparison img { object-fit:cover; }
+.after { position:absolute; inset:0; }
+.beforeLabel,.afterLabel { position:absolute; bottom:1rem; padding:.375rem .75rem; border-radius:999px; color:white; background:rgb(9 27 48 / 85%); font-size:.875rem; }
+.beforeLabel { right:1rem; }.afterLabel {left:1rem;}
+.divider { position:absolute; top:0; bottom:0; width:3px; background:var(--color-electric-cyan); transform:translateX(-50%); }
+.slider { display:grid; gap:.625rem; margin-top:1rem; font-size:.875rem; color:var(--color-ocean-blue); }
+.slider input { width:100%; min-height:2.75rem; accent-color:var(--color-ocean-blue); }
+@media(min-width:640px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr));}.gallery article:nth-child(3n+1){grid-column:1/-1;}.gallery article:nth-child(3n+1) .projectImage{height:27rem;}.dialogInner{padding:2rem;}}
+@media(prefers-reduced-motion:reduce){.projectImage img{transition:none;}.projectButton:hover img{transform:none;}}
