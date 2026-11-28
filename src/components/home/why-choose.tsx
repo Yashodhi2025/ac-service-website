@@ -6,7 +6,9 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { companyBenefits } from "@/data/company-content";
-import { company, getWhatsAppUrl } from "@/config/site";
+import { getWhatsAppUrl } from "@/config/site";
+import { useLanguage } from "@/i18n/language-provider";
+import { buildTeamTalkWhatsAppMessage } from "@/i18n/whatsapp";
 import { ensureGsap, MOTION_QUERIES } from "@/lib/gsap";
 import styles from "@/components/ui/site-ui.module.css";
 
@@ -21,6 +23,7 @@ const icons = {
 
 export function WhyChoose() {
   const rootRef = useRef<HTMLElement>(null);
+  const { messages } = useLanguage();
 
   useEffect(() => {
     const root = rootRef.current;
@@ -46,7 +49,6 @@ export function WhyChoose() {
           const benefitIcons = root.querySelectorAll<HTMLElement>("[data-why-benefit-icon]");
           const cta = root.querySelector<HTMLElement>("[data-why-cta]");
 
-          // Image mask reveal + subtle scale settle
           if (photoFrame) {
             gsap.from(photoFrame, {
               clipPath: "inset(10% 0% 0% 0% round 1.5rem 1.5rem 5rem 1.5rem)",
@@ -66,7 +68,6 @@ export function WhyChoose() {
               scrollTrigger: { trigger: photoFrame ?? photoParallax, start: "top 88%", once: true },
             });
 
-            // Subtle scroll-driven vertical image parallax
             gsap.fromTo(
               photoParallax,
               { yPercent: isDesktop ? -5 : -2.5 },
@@ -94,13 +95,8 @@ export function WhyChoose() {
             });
           }
 
-          // Text reveals on right column
           const headTl = gsap.timeline({
-            scrollTrigger: {
-              trigger: title ?? root,
-              start: "top 88%",
-              once: true,
-            },
+            scrollTrigger: { trigger: title ?? root, start: "top 88%", once: true },
           });
           if (eyebrow) {
             headTl.from(eyebrow, { x: -14, opacity: 0, duration: 0.5, ease: "power2.out", clearProps: "transform,opacity" }, 0);
@@ -116,7 +112,6 @@ export function WhyChoose() {
             headTl.from(lead, { y: 12, opacity: 0, duration: 0.6, ease: "power3.out", clearProps: "transform,opacity" }, 0.18);
           }
 
-          // Staggered progressive benefit rows
           if (benefits.length) {
             gsap.from(benefits, {
               y: 18,
@@ -125,11 +120,7 @@ export function WhyChoose() {
               stagger: isDesktop ? 0.08 : 0.06,
               ease: "power3.out",
               clearProps: "transform,opacity",
-              scrollTrigger: {
-                trigger: benefits[0],
-                start: "top 90%",
-                once: true,
-              },
+              scrollTrigger: { trigger: benefits[0], start: "top 90%", once: true },
             });
           }
 
@@ -141,11 +132,7 @@ export function WhyChoose() {
               stagger: 0.08,
               ease: "back.out(1.4)",
               clearProps: "transform",
-              scrollTrigger: {
-                trigger: benefits[0],
-                start: "top 90%",
-                once: true,
-              },
+              scrollTrigger: { trigger: benefits[0], start: "top 90%", once: true },
             });
           }
 
@@ -182,37 +169,38 @@ export function WhyChoose() {
             <div className={styles.photoParallax} data-why-photo-parallax>
               <Image
                 src="/images/technician-illustration.webp"
-                alt="Illustrative technician inspecting an indoor A/C unit"
+                alt={messages.whyChoose.photoAlt}
                 fill
                 sizes="(min-width:1024px) 43vw, 92vw"
               />
             </div>
           </div>
           <figcaption className={styles.caption} data-why-caption>
-            Illustrative photography. This is not a photograph of the ECME team.
+            {messages.whyChoose.photoCaption}
           </figcaption>
         </figure>
         <div>
           <div>
-            <p className={styles.eyebrow} data-why-eyebrow>Care behind the cooling</p>
+            <p className={styles.eyebrow} data-why-eyebrow>{messages.whyChoose.eyebrow}</p>
             <h2 id="why-heading" className={styles.title} data-why-title>
-              Why Choose Earth Coolman Engineers?
+              {messages.whyChoose.title}
             </h2>
             <p className={styles.lead} data-why-lead>
-              A considered approach to your comfort, from understanding the problem to explaining the work.
+              {messages.whyChoose.lead}
             </p>
           </div>
           <ul className={styles.benefits}>
-            {companyBenefits.map((benefit) => {
+            {companyBenefits.map((benefit, index) => {
               const Icon = icons[benefit.icon];
+              const localized = messages.whyChoose.benefits[index] ?? benefit;
               return (
-                <li key={benefit.title} className={styles.benefit} data-why-benefit>
+                <li key={benefit.icon} className={styles.benefit} data-why-benefit>
                   <span className={styles.benefitIcon} data-why-benefit-icon>
                     <Icon size={23} strokeWidth={1.5} aria-hidden="true" />
                   </span>
                   <div>
-                    <h3>{benefit.title}</h3>
-                    <p>{benefit.description}</p>
+                    <h3>{localized.title}</h3>
+                    <p>{localized.description}</p>
                   </div>
                 </li>
               );
@@ -221,12 +209,12 @@ export function WhyChoose() {
           <div className={styles.actions} data-why-cta>
             <a
               className={styles.button}
-              href={getWhatsAppUrl(`Hello ${company.name}, I'd like to talk about my A/C service needs.`)}
+              href={getWhatsAppUrl(buildTeamTalkWhatsAppMessage())}
               target="_blank"
               rel="noopener noreferrer"
             >
               <WhatsAppIcon width={21} height={21} />
-              Talk to Our Team
+              {messages.whyChoose.cta}
             </a>
           </div>
         </div>

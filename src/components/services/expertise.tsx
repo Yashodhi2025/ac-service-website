@@ -5,12 +5,14 @@ import { ArrowUpRight } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { expertiseServices } from "@/config/expertise";
+import { useLanguage } from "@/i18n/language-provider";
 import { ensureGsap, MOTION_QUERIES } from "@/lib/gsap";
 import { ServiceTile } from "./service-tile";
 import styles from "./expertise.module.css";
 
 export function Expertise() {
   const rootRef = useRef<HTMLElement>(null);
+  const { messages } = useLanguage();
 
   useEffect(() => {
     const root = rootRef.current;
@@ -35,7 +37,6 @@ export function Expertise() {
           const viewAll = root.querySelector<HTMLElement>("[data-exp-viewall]");
           const tiles = root.querySelectorAll<HTMLElement>("[data-exp-tile]");
 
-          // Editorial heading entrance
           const headTl = gsap.timeline({
             scrollTrigger: {
               trigger: heading ?? root,
@@ -78,7 +79,6 @@ export function Expertise() {
             );
           }
 
-          // Service images: staggered clip-path mask + subtle scale reveal
           if (isDesktop) {
             tiles.forEach((tile, index) => {
               const photoWrap = tile.querySelector<HTMLElement>("[data-exp-photo-wrap]");
@@ -156,7 +156,6 @@ export function Expertise() {
                 );
               }
 
-              // Subtle vertical scroll parallax on service photography
               if (photoStage) {
                 gsap.fromTo(
                   photoStage,
@@ -175,7 +174,6 @@ export function Expertise() {
               }
             });
           } else {
-            // Mobile: lightweight staggered clip-path & gentle scale
             tiles.forEach((tile) => {
               const photoStage = tile.querySelector<HTMLElement>("[data-exp-photo]");
               const tileTitle = tile.querySelector<HTMLElement>("[data-exp-tile-title]");
@@ -230,18 +228,17 @@ export function Expertise() {
       <div className="page-container">
         <div className={styles.heading} data-exp-heading>
           <div className={styles.intro}>
-            <p className={styles.eyebrow} data-exp-eyebrow>Complete A/C care</p>
-            <h2 id="expertise-heading" className={styles.title} data-exp-title>Our Expertise</h2>
+            <p className={styles.eyebrow} data-exp-eyebrow>{messages.expertise.eyebrow}</p>
+            <h2 id="expertise-heading" className={styles.title} data-exp-title>{messages.expertise.title}</h2>
             <p className={styles.description} data-exp-desc>
-              From the first installation to the finest repair, a little expertise
-              makes all the difference to your comfort.
+              {messages.expertise.description}
             </p>
           </div>
           <Link href="/services" className={styles.viewAll} data-exp-viewall>
-            View All Services <ArrowUpRight size={19} strokeWidth={1.7} aria-hidden="true" />
+            {messages.expertise.viewAll} <ArrowUpRight size={19} strokeWidth={1.7} aria-hidden="true" />
           </Link>
         </div>
-        <ul className={styles.grid} aria-label="Our A/C services">
+        <ul className={styles.grid} aria-label={messages.expertise.gridAria}>
           {expertiseServices.map((service) => <ServiceTile key={service.id} service={service} />)}
         </ul>
       </div>

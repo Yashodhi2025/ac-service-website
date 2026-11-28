@@ -4,37 +4,19 @@ import Link from "next/link";
 import { ClipboardCheck, Gauge, MessagesSquare, Wrench } from "lucide-react";
 import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
-import { company, getWhatsAppUrl } from "@/config/site";
+import { getWhatsAppUrl } from "@/config/site";
+import { useLanguage } from "@/i18n/language-provider";
+import { buildServiceRequestWhatsAppMessage } from "@/i18n/whatsapp";
 import { ensureGsap, MOTION_QUERIES } from "@/lib/gsap";
 import styles from "./how-we-work.module.css";
 
-const workSteps = [
-  {
-    title: "Request a Service",
-    description: "Contact us or send a WhatsApp inquiry.",
-    Icon: MessagesSquare,
-  },
-  {
-    title: "Technician Assessment",
-    description: "Inspect the A/C and explain the required work.",
-    Icon: ClipboardCheck,
-  },
-  {
-    title: "Expert Service",
-    description: "Carry out the agreed installation, repair or maintenance.",
-    Icon: Wrench,
-  },
-  {
-    title: "Final Testing",
-    description: "Check performance and explain the completed work.",
-    Icon: Gauge,
-  },
-];
+const stepIcons = [MessagesSquare, ClipboardCheck, Wrench, Gauge] as const;
 
 export function HowWeWork() {
   const rootRef = useRef<HTMLElement>(null);
   const listRef = useRef<HTMLOListElement>(null);
-  const inquiryUrl = getWhatsAppUrl(`Hello ${company.name}, I'd like to request an A/C service.`);
+  const { messages } = useLanguage();
+  const inquiryUrl = getWhatsAppUrl(buildServiceRequestWhatsAppMessage());
 
   useEffect(() => {
     const root = rootRef.current;
@@ -118,14 +100,12 @@ export function HowWeWork() {
             scrollTrigger: {
               trigger: list,
               start: "clamp(top 84%)",
-              // Clamp to the end of the page so the last step can always be reached.
               end: "clamp(bottom 46%)",
               scrub: desktop ? 0.55 : 0.4,
               invalidateOnRefresh: true,
             },
           });
 
-          // Coordinate each step ring highlight seamlessly with the track progression
           rings.forEach((ring, index) => {
             const startAt = index * 0.95;
             progressTl.fromTo(
@@ -165,31 +145,41 @@ export function HowWeWork() {
     <section ref={rootRef} id="how-we-work" className={styles.section} aria-labelledby="work-heading" data-tone-section="how-we-work">
       <div className="page-container">
         <div className={styles.heading} data-work-heading>
-          <p className={styles.eyebrow}>How We Work</p>
-          <h2 id="work-heading" className={styles.title} data-work-title>Comfort in Four Simple Steps</h2>
+          <p className={styles.eyebrow}>{messages.howWeWork.eyebrow}</p>
+          <h2 id="work-heading" className={styles.title} data-work-title>{messages.howWeWork.title}</h2>
         </div>
         <ol ref={listRef} className={styles.timeline} role="list">
-          {workSteps.map(({ title, description, Icon }, index) => (
-            <li key={title} className={styles.step} data-work-step>
-              {index < workSteps.length - 1 && (
-                <span className={styles.track} aria-hidden="true">
-                  <span className={styles.fill} data-work-fill />
-                </span>
-              )}
-              <div className={styles.iconRing} data-work-ring>
-                <span className={styles.iconCircle}><Icon size={40} strokeWidth={1.4} aria-hidden="true" /></span>
-                <span className={styles.number} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-              </div>
-              <div className={styles.stepCopy}>
-                <h3 className={styles.stepTitle}>{title}</h3>
-                <p className={styles.description}>
-                  {index === 0 ? (
-                    <><Link href="/contact">Contact us</Link> or send a <a href={inquiryUrl} target="_blank" rel="noopener noreferrer">WhatsApp inquiry</a>.</>
-                  ) : description}
-                </p>
-              </div>
-            </li>
-          ))}
+          {messages.howWeWork.steps.map(({ title, description }, index) => {
+            const Icon = stepIcons[index] ?? MessagesSquare;
+            return (
+              <li key={index} className={styles.step} data-work-step>
+                {index < messages.howWeWork.steps.length - 1 && (
+                  <span className={styles.track} aria-hidden="true">
+                    <span className={styles.fill} data-work-fill />
+                  </span>
+                )}
+                <div className={styles.iconRing} data-work-ring>
+                  <span className={styles.iconCircle}><Icon size={40} strokeWidth={1.4} aria-hidden="true" /></span>
+                  <span className={styles.number} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                </div>
+                <div className={styles.stepCopy}>
+                  <h3 className={styles.stepTitle}>{title}</h3>
+                  <p className={styles.description}>
+                    {index === 0 ? (
+                      <>
+                        <Link href="/contact">{messages.howWeWork.step1LinkContact}</Link>
+                        {messages.howWeWork.step1Middle}
+                        <a href={inquiryUrl} target="_blank" rel="noopener noreferrer">
+                          {messages.howWeWork.step1LinkWhatsApp}
+                        </a>
+                        {messages.howWeWork.step1End}
+                      </>
+                    ) : description}
+                  </p>
+                </div>
+              </li>
+            );
+          })}
         </ol>
       </div>
     </section>

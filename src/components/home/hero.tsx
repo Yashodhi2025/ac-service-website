@@ -6,6 +6,7 @@ import { Snowflake } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef } from "react";
 import { BookServiceButton } from "@/components/layout/book-service-button";
+import { useLanguage } from "@/i18n/language-provider";
 import { ensureGsap, MOTION_QUERIES } from "@/lib/gsap";
 import { HeroVisual } from "./hero-visual";
 import { HeroWave } from "./hero-wave";
@@ -16,6 +17,7 @@ const MotionLink = motion.create(Link);
 export function Hero() {
   const rootRef = useRef<HTMLElement>(null);
   const reducedMotion = useReducedMotion();
+  const { messages } = useLanguage();
 
   useEffect(() => {
     const root = rootRef.current;
@@ -39,7 +41,6 @@ export function Hero() {
           const tempWrap = root.querySelector<HTMLElement>("[data-hero-temp-wrap]");
           const copyStage = root.querySelector<HTMLElement>("[data-hero-copy]");
 
-          // Preserve clean immediate arrival (no blocking intro or loading screen)
           const entrance = gsap.timeline({ defaults: { ease: "power3.out" } });
           entrance
             .from(revealItems, {
@@ -55,7 +56,6 @@ export function Hero() {
               0.16
             );
 
-          // Scroll-driven depth as Hero flows into Our Expertise through the curved wave
           const scrollTl = gsap.timeline({
             scrollTrigger: {
               trigger: root,
@@ -91,15 +91,14 @@ export function Hero() {
         <div className={styles.copy} data-hero-copy>
           <p className={styles.eyebrow} data-hero-reveal>
             <Snowflake size={17} strokeWidth={1.6} aria-hidden="true" />
-            Your Comfort. Our Expertise.
+            {messages.hero.eyebrow}
           </p>
           <h1 id="hero-heading" className={styles.headline} data-hero-reveal>
-            <span>Perfect Cooling.</span>{" "}
-            <span className={styles.headlineAccent}>Professional Care.</span>
+            <span>{messages.hero.headlineLine1}</span>{" "}
+            <span className={styles.headlineAccent}>{messages.hero.headlineLine2}</span>
           </h1>
           <p className={styles.description} data-hero-reveal>
-            From seamless A/C installation to expert repairs and regular
-            maintenance, we keep your space comfortable, season after season.
+            {messages.hero.description}
           </p>
           <div className={styles.actions} data-hero-reveal>
             <BookServiceButton />
@@ -110,7 +109,7 @@ export function Hero() {
               whileTap={reducedMotion ? undefined : { scale: 0.98 }}
               transition={{ duration: 0.2 }}
             >
-              Explore Services
+              {messages.common.exploreServices}
             </MotionLink>
           </div>
         </div>

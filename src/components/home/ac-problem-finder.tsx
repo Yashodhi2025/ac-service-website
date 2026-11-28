@@ -7,7 +7,9 @@ import { gsap } from "gsap";
 import { CoolingAtmosphere } from "@/components/animations/cooling-atmosphere";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { acProblems } from "@/config/ac-problems";
-import { company, getWhatsAppUrl } from "@/config/site";
+import { getWhatsAppUrl } from "@/config/site";
+import { useLanguage } from "@/i18n/language-provider";
+import { buildProblemWhatsAppMessage } from "@/i18n/whatsapp";
 import { ensureGsap, MOTION_QUERIES } from "@/lib/gsap";
 import styles from "./ac-problem-finder.module.css";
 
@@ -27,10 +29,13 @@ export function AcProblemFinder() {
   const groupId = useId();
   const rootRef = useRef<HTMLElement>(null);
   const reducedMotion = useReducedMotion();
+  const { messages } = useLanguage();
+
   const selected = acProblems.find((problem) => problem.id === selectedId) ?? acProblems[0];
+  const localizedSelected = messages.problemFinder.problems[selected.id] ?? selected;
   const SelectedIcon = problemIcons[selected.icon];
-  const bookingMessage = `Hello ${company.name}, I'd like to book an A/C service for: ${selected.label}. Could you help me arrange an assessment?`;
-  const bookingUrl = getWhatsAppUrl(bookingMessage);
+  // Always draft WhatsApp inquiry in natural Sinhala-English for the company owner.
+  const bookingUrl = getWhatsAppUrl(buildProblemWhatsAppMessage(selected.id, selected.label));
 
   useEffect(() => {
     const root = rootRef.current;
@@ -54,7 +59,6 @@ export function AcProblemFinder() {
           const layout = root.querySelector<HTMLElement>("[data-pf-layout]");
 
           if (isDesktop) {
-            // Desktop: scroll-linked opposite-direction convergence for headings and panels
             const headTl = gsap.timeline({
               scrollTrigger: {
                 trigger: root,
@@ -75,23 +79,12 @@ export function AcProblemFinder() {
               },
             });
             if (leftPanel) {
-              panelTl.fromTo(
-                leftPanel,
-                { x: -56, opacity: 0.15 },
-                { x: 0, opacity: 1, ease: "none" },
-                0
-              );
+              panelTl.fromTo(leftPanel, { x: -56, opacity: 0.15 }, { x: 0, opacity: 1, ease: "none" }, 0);
             }
             if (rightPanel) {
-              panelTl.fromTo(
-                rightPanel,
-                { x: 56, opacity: 0.15 },
-                { x: 0, opacity: 1, ease: "none" },
-                0
-              );
+              panelTl.fromTo(rightPanel, { x: 56, opacity: 0.15 }, { x: 0, opacity: 1, ease: "none" }, 0);
             }
           } else {
-            // Mobile: lightweight opposite-direction panel reveals (contained inside overflow: clip)
             if (headLeft) {
               gsap.from(headLeft, {
                 x: -16,
@@ -143,27 +136,33 @@ export function AcProblemFinder() {
   }, []);
 
   return (
-    <section ref={rootRef} id="ac-problem-finder" className={styles.section} aria-labelledby="ac-problems-heading" data-tone-section="problem-finder">
+    <section
+      ref={rootRef}
+      id="ac-problem-finder"
+      className={styles.section}
+      aria-labelledby="ac-problems-heading"
+      data-tone-section="problem-finder"
+    >
       <CoolingAtmosphere />
       <div className="page-container">
         <div className={styles.heading}>
           <div data-pf-head-left>
-            <p className={styles.eyebrow}>Let’s find your next step</p>
-            <h2 id="ac-problems-heading" className={styles.title}>What&apos;s Wrong With Your A/C?</h2>
+            <p className={styles.eyebrow}>{messages.problemFinder.eyebrow}</p>
+            <h2 id="ac-problems-heading" className={styles.title}>{messages.problemFinder.title}</h2>
           </div>
           <p className={styles.intro} data-pf-head-right>
-            Tell us what you&apos;re noticing. We&apos;ll suggest a service to discuss
-            with {company.shortName}.
+            {messages.problemFinder.intro}
           </p>
         </div>
 
         <div className={styles.layout} data-pf-layout>
           <fieldset className={styles.choices} data-pf-panel="left">
-            <legend className={styles.legend}>Choose the closest match</legend>
+            <legend className={styles.legend}>{messages.problemFinder.legend}</legend>
             <div className={styles.optionGrid}>
               {acProblems.map((problem) => {
                 const Icon = problemIcons[problem.icon];
                 const active = problem.id === selectedId;
+                const localized = messages.problemFinder.problems[problem.id] ?? problem;
 
                 return (
                   <label key={problem.id} className={styles.choice}>
@@ -184,7 +183,7 @@ export function AcProblemFinder() {
                       transition={{ duration: 0.2 }}
                     >
                       <Icon className={styles.problemIcon} size={26} strokeWidth={1.5} aria-hidden="true" />
-                      <span className={styles.optionLabel}>{problem.label}</span>
+                      <span className={styles.optionLabel}>{localized.label}</span>
                       <motion.span
                         className={styles.selectionCheck}
                         initial={false}
@@ -199,13 +198,13 @@ export function AcProblemFinder() {
                 );
               })}
             </div>
-            <p className={styles.choiceNote}>A little guidance. A clearer conversation.</p>
+            <p className={styles.choiceNote}>{messages.problemFinder.choiceNote}</p>
           </fieldset>
 
           <div id={`${groupId}-suggestion`} className={styles.suggestion} data-pf-panel="right">
             <div className={styles.suggestionHeader}>
               <Sparkles size={16} strokeWidth={1.5} aria-hidden="true" />
-              Suggested service
+              {messages.problemFinder.suggestedService}
             </div>
             <div className={styles.contentSlot}>
               <AnimatePresence mode="wait" initial={false}>
@@ -219,34 +218,33 @@ export function AcProblemFinder() {
                 >
                   <div className={styles.selectedProblem}>
                     <SelectedIcon size={19} strokeWidth={1.5} aria-hidden="true" />
-                    <span>For: {selected.label}</span>
+                    <span>{messages.problemFinder.forPrefix} {localizedSelected.label}</span>
                   </div>
-                  <h3 className={styles.serviceTitle}>{selected.service}</h3>
-                  <p className={styles.explanation}>{selected.explanation}</p>
+                  <h3 className={styles.serviceTitle}>{localizedSelected.service}</h3>
+                  <p className={styles.explanation}>{localizedSelected.explanation}</p>
                 </motion.div>
               </AnimatePresence>
             </div>
             <p className={styles.assessmentNote}>
-              A service suggestion, not a confirmed diagnosis. {company.shortName} will
-              need to assess your A/C to confirm the cause and appropriate work.
+              {messages.problemFinder.assessmentNote}
             </p>
             <motion.a
               href={bookingUrl}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.bookingButton}
-              aria-label={`Book help for ${selected.label} with ${company.shortName} on WhatsApp (opens in a new tab)`}
+              aria-label={`${messages.problemFinder.bookAriaPrefix} ${localizedSelected.label} ${messages.problemFinder.bookAriaSuffix}`}
               whileHover={reducedMotion ? undefined : { y: -2 }}
               whileTap={reducedMotion ? undefined : { scale: 0.985 }}
               transition={{ duration: 0.2 }}
             >
               <WhatsAppIcon width={22} height={22} />
-              Book on WhatsApp
+              {messages.problemFinder.bookOnWhatsApp}
             </motion.a>
           </div>
         </div>
         <div className={styles.srOnly} role="status" aria-live="polite" aria-atomic="true">
-          {selected.label}. Suggested service: {selected.service}. {selected.explanation}
+          {localizedSelected.label}. {messages.problemFinder.liveSuggestedPrefix} {localizedSelected.service}. {localizedSelected.explanation}
         </div>
       </div>
     </section>

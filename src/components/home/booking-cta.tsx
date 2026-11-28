@@ -7,14 +7,16 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { company, contactLinks, getWhatsAppUrl } from "@/config/site";
+import { useLanguage } from "@/i18n/language-provider";
+import { buildServiceRequestWhatsAppMessage } from "@/i18n/whatsapp";
 import { ensureGsap, MOTION_QUERIES } from "@/lib/gsap";
 import styles from "@/components/ui/site-ui.module.css";
 
 export function BookingCTA({ service }: { service?: string }) {
   const rootRef = useRef<HTMLElement>(null);
-  const message = service
-    ? `Hello ${company.name}, I'd like to discuss ${service}.`
-    : `Hello ${company.name}, I'd like to discuss an A/C service.`;
+  const { messages } = useLanguage();
+  // Always generate WhatsApp inquiry in natural Sinhala-English for ECME's team.
+  const whatsappUrl = getWhatsAppUrl(buildServiceRequestWhatsAppMessage(service));
 
   useEffect(() => {
     const root = rootRef.current;
@@ -80,21 +82,24 @@ export function BookingCTA({ service }: { service?: string }) {
   }, []);
 
   return (
-    <section ref={rootRef} className={styles.cta} aria-label="Get in touch" data-tone-section="booking-cta">
+    <section
+      ref={rootRef}
+      className={styles.cta}
+      aria-label={messages.bookingCta.ariaLabel}
+      data-tone-section="booking-cta"
+    >
       <CoolingAtmosphere variant="transition" />
       <div className={`page-container ${styles.ctaInner}`}>
         <div className={styles.ctaCopy}>
-          <p className={styles.eyebrow} data-cta-eyebrow>Let’s talk comfort</p>
-          <h2 className={styles.title} data-cta-title>Your next step to better cooling.</h2>
-          <p data-cta-copy>
-            Tell ECME about your space and your A/C. We’ll discuss an assessment, the scope and the next steps.
-          </p>
+          <p className={styles.eyebrow} data-cta-eyebrow>{messages.bookingCta.eyebrow}</p>
+          <h2 className={styles.title} data-cta-title>{messages.bookingCta.title}</h2>
+          <p data-cta-copy>{messages.bookingCta.body}</p>
         </div>
         <div>
           <div className={styles.actions} data-cta-actions>
-            <a className={styles.button} href={getWhatsAppUrl(message)} target="_blank" rel="noopener noreferrer">
+            <a className={styles.button} href={whatsappUrl} target="_blank" rel="noopener noreferrer">
               <WhatsAppIcon width={21} height={21} />
-              WhatsApp ECME
+              {messages.common.whatsappEcme}
             </a>
             <a className={styles.outlineButton} href={contactLinks.phone}>
               <Phone size={18} aria-hidden="true" />
@@ -103,7 +108,7 @@ export function BookingCTA({ service }: { service?: string }) {
           </div>
           <p data-cta-sublink>
             <Link className="underline underline-offset-4" href={company.bookingHref}>
-              Prefer a guided request? Book a Service
+              {messages.bookingCta.guidedLink}
             </Link>
           </p>
         </div>

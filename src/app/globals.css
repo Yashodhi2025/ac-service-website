@@ -34,8 +34,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter), Arial, sans-serif;
-  --font-heading: var(--font-manrope), Arial, sans-serif;
+  --font-sans: var(--font-inter), var(--font-sinhala), Arial, sans-serif;
+  --font-heading: var(--font-manrope), var(--font-sinhala), Arial, sans-serif;
 }
 
 @layer base {
@@ -106,4 +106,19 @@
   max-width: var(--container-page);
   margin-inline: auto;
   padding-inline: var(--spacing-gutter);
+}
+
+/* Natural Sinhala-English readability: slightly taller line-height and relaxed tracking so vowel signs never clip. */
+html[data-locale="si"] body {
+  line-height: 1.82;
+}
+
+html[data-locale="si"] h1,
+html[data-locale="si"] h2,
+html[data-locale="si"] h3,
+html[data-locale="si"] h4,
+html[data-locale="si"] h5,
+html[data-locale="si"] h6 {
+  line-height: 1.32;
+  letter-spacing: -0.01em;
 }

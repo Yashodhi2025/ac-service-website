@@ -6,6 +6,7 @@ import { motion, useInView, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import acUnit from "../../../public/images/ac-unit.png";
 import { VaporField } from "@/components/animations/vapor-field";
+import { useLanguage } from "@/i18n/language-provider";
 import styles from "./hero.module.css";
 
 export function HeroVisual() {
@@ -14,6 +15,7 @@ export function HeroVisual() {
   const visible = useInView(ref, { amount: 0.1 });
   const reducedMotion = useReducedMotion();
   const [tabVisible, setTabVisible] = useState(true);
+  const { messages } = useLanguage();
 
   useEffect(() => {
     function syncVisibility() { setTabVisible(!document.hidden); }
@@ -41,7 +43,7 @@ export function HeroVisual() {
           <Image
             ref={unitRef}
             src={acUnit}
-            alt="White wall-mounted air conditioner with open cooling vents"
+            alt={messages.hero.unitAlt}
             className={styles.unitImage}
             sizes="(min-width: 1280px) 580px, (min-width: 1024px) 46vw, (min-width: 640px) 560px, 92vw"
             preload
@@ -52,7 +54,7 @@ export function HeroVisual() {
         <div className={styles.temperature}>
           <span className={styles.temperatureIcon}><Snowflake size={20} strokeWidth={1.5} aria-hidden="true" /></span>
           <div>
-            <p className={styles.temperatureLabel}>Comfort setting</p>
+            <p className={styles.temperatureLabel}>{messages.hero.comfortSetting}</p>
             <p className={styles.temperatureValue}>22<span>°C</span></p>
           </div>
         </div>

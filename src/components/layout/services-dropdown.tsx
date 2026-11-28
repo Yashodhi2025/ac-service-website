@@ -8,6 +8,7 @@ import {
 import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useId, useRef, useState } from "react";
 import { services } from "@/config/site";
+import { useLanguage } from "@/i18n/language-provider";
 import styles from "./header.module.css";
 
 const serviceIcons = {
@@ -35,6 +36,7 @@ export function ServicesDropdown({ mobile = false, active, onNavigate }: Service
   const panelRef = useRef<HTMLDivElement>(null);
   const panelId = useId();
   const reducedMotion = useReducedMotion();
+  const { messages } = useLanguage();
 
   useEffect(() => {
     if (!open) return;
@@ -75,13 +77,13 @@ export function ServicesDropdown({ mobile = false, active, onNavigate }: Service
           aria-current={active ? "page" : undefined}
           onClick={navigate}
         >
-          Services
+          {messages.common.services}
         </Link>
         <button
           ref={triggerRef}
           type="button"
           className={styles.servicesToggle}
-          aria-label={open ? "Close services menu" : "Open services menu"}
+          aria-label={open ? messages.nav.closeServices : messages.nav.openServices}
           aria-expanded={open}
           aria-controls={panelId}
           onClick={() => setOpen(!open)}
@@ -110,17 +112,18 @@ export function ServicesDropdown({ mobile = false, active, onNavigate }: Service
         style={mobile ? undefined : { pointerEvents: open ? "auto" : "none" }}
       >
         <div className={styles.servicesSurface}>
-          <p className={styles.dropdownLabel}>Complete A/C care</p>
+          <p className={styles.dropdownLabel}>{messages.nav.dropdownLabel}</p>
           <ul className={styles.serviceGrid}>
             {services.map((service) => {
               const Icon = serviceIcons[service.icon];
+              const localized = messages.servicesCatalogue[service.id];
               return (
                 <li key={service.id}>
                   <Link href={service.href} className={styles.serviceLink} onClick={navigate}>
                     <span className={styles.serviceIcon}><Icon size={19} strokeWidth={1.7} aria-hidden="true" /></span>
                     <span>
-                      <span className={styles.serviceName}>{service.name}</span>
-                      <span className={styles.serviceDescription}>{service.description}</span>
+                      <span className={styles.serviceName}>{localized?.name ?? service.name}</span>
+                      <span className={styles.serviceDescription}>{localized?.short ?? service.description}</span>
                     </span>
                   </Link>
                 </li>

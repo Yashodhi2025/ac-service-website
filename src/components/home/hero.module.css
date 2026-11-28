@@ -175,3 +175,15 @@
 @media (prefers-reduced-motion: reduce) {
   .hero *, .hero *::after { transition: none; }
 }
+
+:global(html[data-locale="si"]) .headline {
+  font-size: clamp(1.85rem, 7.6vw, 3rem);
+  line-height: 1.26;
+  letter-spacing: -0.015em;
+}
+
+@media (min-width: 1024px) {
+  :global(html[data-locale="si"]) .headline {
+    font-size: clamp(2.35rem, 3.6vw, 3.55rem);
+  }
+}

@@ -6,17 +6,19 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ProjectGallery } from "@/components/projects/project-gallery";
 import { projects } from "@/data/company-content";
+import { useLanguage } from "@/i18n/language-provider";
 import { ensureGsap, MOTION_QUERIES } from "@/lib/gsap";
 import styles from "@/components/ui/site-ui.module.css";
 
 const illustrativeAreas = [
-  { image: "installation", label: "Installation" },
-  { image: "full-service", label: "Servicing" },
-  { image: "pcb-repair", label: "PCB repair" },
+  { image: "installation" },
+  { image: "full-service" },
+  { image: "pcb-repair" },
 ] as const;
 
 export function RecentProjects() {
   const rootRef = useRef<HTMLElement>(null);
+  const { messages } = useLanguage();
 
   useEffect(() => {
     const root = rootRef.current;
@@ -45,7 +47,6 @@ export function RecentProjects() {
           if (title) headTl.from(title, { clipPath: "inset(0% 0% 100% 0%)", y: 18, duration: 0.78, ease: "expo.out", clearProps: "clipPath,transform" }, 0.06);
           if (explore) headTl.from(explore, { x: isDesktop ? 16 : 0, y: isDesktop ? 0 : 10, opacity: 0, duration: 0.55, ease: "power3.out", clearProps: "transform,opacity" }, 0.2);
 
-          // Staggered image-mask reveals on gallery cards
           if (cards.length) {
             cards.forEach((card, index) => {
               const mask = card.querySelector<HTMLElement>("[data-proj-mask]");
@@ -116,39 +117,42 @@ export function RecentProjects() {
       <div className="page-container">
         <div className={styles.heading}>
           <div>
-            <p className={styles.eyebrow} data-proj-eyebrow>Recent Projects</p>
+            <p className={styles.eyebrow} data-proj-eyebrow>{messages.recentProjects.eyebrow}</p>
             <h2 id="recent-projects-heading" className={styles.title} data-proj-title>
-              The details make the difference.
+              {messages.recentProjects.title}
             </h2>
           </div>
           <Link href="/projects" className={styles.outlineButton} data-proj-explore>
-            Explore Projects
+            {messages.recentProjects.exploreButton}
           </Link>
         </div>
         <ProjectGallery preview />
         {!projects.length && (
           <div>
             <p className={styles.small}>
-              Explore our service areas through illustrative photography below. These images are not completed ECME projects.
+              {messages.recentProjects.illustrativeNote}
             </p>
             <div className={styles.editorial}>
-              {illustrativeAreas.map((item) => (
-                <figure key={item.image} data-proj-card>
-                  <div className={styles.editorialImage} data-proj-mask>
-                    <div className={styles.editorialStage} data-proj-image>
-                      <Image
-                        src={`/images/services/${item.image}.webp`}
-                        alt={`Illustrative ${item.label.toLowerCase()} service photography`}
-                        fill
-                        sizes="(min-width:640px) 40vw, 92vw"
-                      />
+              {illustrativeAreas.map((item) => {
+                const label = messages.recentProjects.areas[item.image] ?? item.image;
+                return (
+                  <figure key={item.image} data-proj-card>
+                    <div className={styles.editorialImage} data-proj-mask>
+                      <div className={styles.editorialStage} data-proj-image>
+                        <Image
+                          src={`/images/services/${item.image}.webp`}
+                          alt={`${label} · ${messages.recentProjects.illustrationSuffix}`}
+                          fill
+                          sizes="(min-width:640px) 40vw, 92vw"
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <figcaption className={styles.label} data-proj-label>
-                    {item.label} · Illustration
-                  </figcaption>
-                </figure>
-              ))}
+                    <figcaption className={styles.label} data-proj-label>
+                      {label} · {messages.recentProjects.illustrationSuffix}
+                    </figcaption>
+                  </figure>
+                );
+              })}
             </div>
           </div>
         )}

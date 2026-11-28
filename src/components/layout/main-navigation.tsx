@@ -6,7 +6,10 @@ import { useEffect, useId, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { company, contactLinks } from "@/config/site";
+import { useLanguage } from "@/i18n/language-provider";
+import { buildGeneralWhatsAppUrl } from "@/i18n/whatsapp";
 import { BookServiceButton } from "./book-service-button";
+import { LanguageSwitcher } from "./language-switcher";
 import { NavigationLinks } from "./navigation-links";
 import styles from "./header.module.css";
 
@@ -17,6 +20,8 @@ export function MainNavigation({ logo }: { logo: ReactNode }) {
   const panelRef = useRef<HTMLDivElement>(null);
   const panelId = useId();
   const reducedMotion = useReducedMotion();
+  const { messages } = useLanguage();
+  const whatsappUrl = buildGeneralWhatsAppUrl();
 
   useEffect(() => {
     const desktop = window.matchMedia("(min-width: 1024px)");
@@ -73,15 +78,18 @@ export function MainNavigation({ logo }: { logo: ReactNode }) {
       >
         <div className={`page-container ${styles.navInner}`}>
           {logo}
-          <nav aria-label="Main navigation" className={styles.desktopNav}>
+          <nav aria-label={messages.nav.mainAria} className={styles.desktopNav}>
             <NavigationLinks />
           </nav>
-          <div className={styles.desktopBooking}><BookServiceButton /></div>
+          <div className={styles.desktopControls}>
+            <LanguageSwitcher />
+            <BookServiceButton />
+          </div>
           <button
             ref={toggleRef}
             type="button"
             className={styles.mobileToggle}
-            aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-label={mobileOpen ? messages.nav.closeMenu : messages.nav.openMenu}
             aria-expanded={mobileOpen}
             aria-controls={panelId}
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -101,7 +109,8 @@ export function MainNavigation({ logo }: { logo: ReactNode }) {
         >
           <div className={styles.mobileScroll}>
             <div className="page-container">
-              <nav aria-label="Mobile navigation">
+              <LanguageSwitcher mobile />
+              <nav aria-label={messages.nav.mobileAria}>
                 <NavigationLinks mobile onNavigate={() => setMobileOpen(false)} />
               </nav>
               <div className={styles.mobileBooking}>
@@ -109,8 +118,8 @@ export function MainNavigation({ logo }: { logo: ReactNode }) {
                 <a href={contactLinks.phone} className={styles.mobilePhone}>
                   <Phone size={16} aria-hidden="true" /> {company.phone}
                 </a>
-                <a href={contactLinks.whatsapp} className={styles.mobilePhone} target="_blank" rel="noopener noreferrer">
-                  <WhatsAppIcon width={18} height={18} /> WhatsApp {company.shortName}
+                <a href={whatsappUrl} className={styles.mobilePhone} target="_blank" rel="noopener noreferrer">
+                  <WhatsAppIcon width={18} height={18} /> {messages.nav.whatsappShort}
                 </a>
                 <p className="text-center text-sm text-ocean-blue">{company.address}</p>
               </div>

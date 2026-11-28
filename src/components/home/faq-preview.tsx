@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { faqs } from "@/data/faqs";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
+import { useLanguage } from "@/i18n/language-provider";
 import { ensureGsap, MOTION_QUERIES } from "@/lib/gsap";
 import styles from "@/components/ui/site-ui.module.css";
 
@@ -12,6 +13,7 @@ const previewFaqs = faqs.filter((f) => ["book", "confirmed", "normal-full", "coo
 
 export function FaqPreview() {
   const rootRef = useRef<HTMLElement>(null);
+  const { messages } = useLanguage();
 
   useEffect(() => {
     const root = rootRef.current;
@@ -71,13 +73,13 @@ export function FaqPreview() {
     >
       <div className={`page-container ${styles.twoColumns}`}>
         <div data-faq-intro>
-          <p className={styles.eyebrow}>A little clarity</p>
-          <h2 className={styles.title} id="faq-preview-heading">Questions before the cool air?</h2>
+          <p className={styles.eyebrow}>{messages.faqPreview.eyebrow}</p>
+          <h2 className={styles.title} id="faq-preview-heading">{messages.faqPreview.title}</h2>
           <p className={styles.lead}>
-            Understand the process before you request a visit. For equipment-specific advice, speak directly with ECME.
+            {messages.faqPreview.lead}
           </p>
           <div className={styles.actions}>
-            <Link href="/faq" className={styles.outlineButton}>Explore All FAQs</Link>
+            <Link href="/faq" className={styles.outlineButton}>{messages.faqPreview.exploreAll}</Link>
           </div>
         </div>
         <div data-faq-list>

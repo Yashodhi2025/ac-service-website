@@ -1,6 +1,13 @@
-import { PageHero } from "@/components/ui/page-hero";
-import { BookingForm } from "@/components/forms/booking-form";
+import { BookServicePageContent } from "@/components/pages/book-service-page-content";
 import { pageMetadata } from "@/lib/metadata";
-import styles from "@/components/ui/site-ui.module.css";
-export const metadata=pageMetadata("Book a Service","Prepare an A/C service request for ECME. Choose a service, share your unit details and preferred date, then send your request through WhatsApp.","/book-service");
-export default async function BookingPage({searchParams}:PageProps<"/book-service">){const{service}=await searchParams;return <main id="main-content" tabIndex={-1}><PageHero eyebrow="Service request" title="Your comfort starts here." description="Tell us about the service, your A/C and your preferred date. Review your details, then send the request to ECME through WhatsApp." cta={false}/><section className={styles.section} aria-label="Request a service"><div className="page-container max-w-5xl"><p className={`${styles.note} mb-8`}>This is an inquiry, not a confirmed booking. ECME will confirm availability, scope and the appointment directly. Your form details are not saved by this website.</p><BookingForm initialService={typeof service==="string"?service:undefined}/></div></section></main>;}
+
+export const metadata = pageMetadata(
+  "Book a Service",
+  "Prepare an A/C service request for ECME. Choose a service, share your unit details and preferred date, then send your request through WhatsApp.",
+  "/book-service"
+);
+
+export default async function BookingPage({ searchParams }: PageProps<"/book-service">) {
+  const { service } = await searchParams;
+  return <BookServicePageContent initialService={typeof service === "string" ? service : undefined} />;
+}

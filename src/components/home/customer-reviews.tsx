@@ -6,7 +6,9 @@ import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 import { gsap } from "gsap";
 import { customerReviews } from "@/data/company-content";
 import type { Review } from "@/data/company-content";
-import { contactLinks, getWhatsAppUrl, company } from "@/config/site";
+import { contactLinks, getWhatsAppUrl } from "@/config/site";
+import { useLanguage } from "@/i18n/language-provider";
+import { buildFeedbackWhatsAppMessage } from "@/i18n/whatsapp";
 import { ensureGsap, MOTION_QUERIES } from "@/lib/gsap";
 import styles from "@/components/ui/site-ui.module.css";
 import css from "./reviews.module.css";
@@ -16,6 +18,7 @@ export function CustomerReviews({ items = customerReviews }: { items?: Review[] 
   const reduce = useReducedMotion();
   const id = useId();
   const rootRef = useRef<HTMLElement>(null);
+  const { messages } = useLanguage();
   const current = items.length ? items[index % items.length] : undefined;
 
   useEffect(() => {
@@ -95,16 +98,16 @@ export function CustomerReviews({ items = customerReviews }: { items?: Review[] 
     >
       <div className={`page-container ${styles.twoColumns}`}>
         <div data-rev-intro>
-          <p className={styles.eyebrow}>Customer Reviews</p>
+          <p className={styles.eyebrow}>{messages.reviews.eyebrow}</p>
           <h2 id={`${id}-heading`} className={styles.title}>
-            Real experiences.<br />In their own words.
+            {messages.reviews.titleLine1}<br />{messages.reviews.titleLine2}
           </h2>
           <p className={styles.lead}>
-            Feedback belongs to the people who shared it. We publish genuine customer comments with permission.
+            {messages.reviews.lead}
           </p>
           <div className={styles.actions}>
             <a className={styles.outlineButton} href={contactLinks.facebook} target="_blank" rel="noopener noreferrer">
-              Visit ECME on Facebook
+              {messages.reviews.facebookButton}
             </a>
           </div>
         </div>
@@ -112,7 +115,7 @@ export function CustomerReviews({ items = customerReviews }: { items?: Review[] 
           className={css.review}
           role="region"
           aria-roledescription={current ? "carousel" : undefined}
-          aria-label="Customer feedback"
+          aria-label={messages.reviews.regionAria}
           data-rev-card
         >
           <Quote size={42} strokeWidth={1} aria-hidden="true" className={css.quoteIcon} data-rev-quote />
@@ -128,7 +131,7 @@ export function CustomerReviews({ items = customerReviews }: { items?: Review[] 
                     transition={{ duration: reduce ? 0 : 0.22 }}
                   >
                     {current.rating !== undefined && (
-                      <div className={css.stars} aria-label={`${current.rating} out of 5 stars`}>
+                      <div className={css.stars} aria-label={`${current.rating} ${messages.reviews.starsSuffix}`}>
                         {Array.from({ length: Math.max(0, Math.min(5, Math.round(current.rating))) }, (_, i) => (
                           <Star key={i} size={17} fill="currentColor" aria-hidden="true" />
                         ))}
@@ -153,7 +156,7 @@ export function CustomerReviews({ items = customerReviews }: { items?: Review[] 
                 <div className={css.controls}>
                   <button
                     type="button"
-                    aria-label="Previous review"
+                    aria-label={messages.reviews.previousReview}
                     aria-controls={`${id}-slide`}
                     onClick={() => setIndex((index + items.length - 1) % items.length)}
                   >
@@ -162,7 +165,7 @@ export function CustomerReviews({ items = customerReviews }: { items?: Review[] 
                   <span>{(index % items.length) + 1} / {items.length}</span>
                   <button
                     type="button"
-                    aria-label="Next review"
+                    aria-label={messages.reviews.nextReview}
                     aria-controls={`${id}-slide`}
                     onClick={() => setIndex((index + 1) % items.length)}
                   >
@@ -173,17 +176,15 @@ export function CustomerReviews({ items = customerReviews }: { items?: Review[] 
             </>
           ) : (
             <>
-              <h3>Your experience belongs here.</h3>
-              <p>
-                No customer reviews have been published on this site yet. If you have used ECME, you can share feedback directly with the company.
-              </p>
+              <h3>{messages.reviews.emptyTitle}</h3>
+              <p>{messages.reviews.emptyBody}</p>
               <a
                 className={styles.textLink}
-                href={getWhatsAppUrl(`Hello ${company.name}, I'd like to share feedback about my service experience.`)}
+                href={getWhatsAppUrl(buildFeedbackWhatsAppMessage())}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Share feedback with ECME
+                {messages.reviews.shareFeedback}
               </a>
             </>
           )}

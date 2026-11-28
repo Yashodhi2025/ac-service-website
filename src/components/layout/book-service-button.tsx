@@ -4,12 +4,14 @@ import Link from "next/link";
 import { CalendarDays } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { company } from "@/config/site";
+import { useLanguage } from "@/i18n/language-provider";
 import styles from "./header.module.css";
 
 const MotionLink = motion.create(Link);
 
 export function BookServiceButton({ onNavigate }: { onNavigate?: () => void }) {
   const reducedMotion = useReducedMotion();
+  const { messages } = useLanguage();
 
   return (
     <MotionLink
@@ -21,7 +23,7 @@ export function BookServiceButton({ onNavigate }: { onNavigate?: () => void }) {
       transition={{ duration: 0.2, ease: "easeOut" }}
     >
       <CalendarDays size={17} strokeWidth={1.8} aria-hidden="true" />
-      Book a Service
+      {messages.common.bookService}
     </MotionLink>
   );
 }

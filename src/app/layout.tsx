@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { SiteHeader } from "@/components/layout/site-header";
 import { FloatingWhatsApp } from "@/components/layout/floating-whatsapp";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { LanguageProvider } from "@/i18n/language-provider";
 import { getSiteOrigin } from "@/lib/metadata";
 import { company } from "@/config/site";
 import "./globals.css";
@@ -21,9 +22,16 @@ const manrope = localFont({
   display: "swap",
 });
 
+const notoSansSinhala = localFont({
+  src: "./fonts/noto-sans-sinhala-variable.ttf",
+  variable: "--font-sinhala",
+  weight: "100 900",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: getSiteOrigin() ? new URL(getSiteOrigin()!) : undefined,
-  alternates: getSiteOrigin() ? {canonical:getSiteOrigin()} : undefined,
+  alternates: getSiteOrigin() ? { canonical: getSiteOrigin() } : undefined,
   title: `${company.name} (ECME) | A/C Services`,
   description: company.description,
   applicationName: company.name,
@@ -38,15 +46,32 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
-      className={`${inter.variable} ${manrope.variable} antialiased`}
+      lang="si"
+      data-locale="si"
+      className={`${inter.variable} ${manrope.variable} ${notoSansSinhala.variable} antialiased`}
+      suppressHydrationWarning
     >
       <body>
-        <SiteHeader />
-        {children}
-        <SiteFooter />
-        <FloatingWhatsApp />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({"@context":"https://schema.org","@type":"LocalBusiness",name:company.name,telephone:company.phoneInternational,address:company.address,sameAs:[company.facebook],...(getSiteOrigin()?{url:getSiteOrigin()}:{} )}).replace(/</g,"\\u003c")}} />
+        <LanguageProvider>
+          <SiteHeader />
+          {children}
+          <SiteFooter />
+          <FloatingWhatsApp />
+        </LanguageProvider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              name: company.name,
+              telephone: company.phoneInternational,
+              address: company.address,
+              sameAs: [company.facebook],
+              ...(getSiteOrigin() ? { url: getSiteOrigin() } : {}),
+            }).replace(/</g, "\\u003c"),
+          }}
+        />
       </body>
     </html>
   );
