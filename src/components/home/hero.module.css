@@ -68,9 +68,11 @@
   color: var(--color-ice-white);
   font-size: 0.875rem;
   font-weight: 600;
-  transition: border-color 200ms ease, background-color 200ms ease;
+  transition: border-color 200ms ease, background-color 200ms ease, box-shadow 350ms ease;
 }
 .exploreButton:hover { border-color: var(--color-solar-orange); background: rgb(0 199 232 / 7%); }
+.exploreButton:focus-visible { box-shadow: var(--shadow-freezing); }
+@media (hover: hover) { .exploreButton:hover { box-shadow: var(--shadow-freezing); } }
 .hero a:focus-visible { outline-color: var(--color-electric-cyan); }
 
 .visual {
@@ -111,14 +113,6 @@
   width: 104%;
   height: auto;
   filter: drop-shadow(0 22px 24px rgb(0 0 0 / 18%));
-}
-.airflow {
-  position: absolute;
-  top: 52%;
-  left: 5%;
-  width: 92%;
-  height: 55%;
-  opacity: 0.85;
 }
 .temperature {
   position: absolute;

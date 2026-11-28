@@ -12,9 +12,13 @@
 .button { background:var(--color-electric-cyan); color:var(--color-midnight-navy); }
 .outlineButton { border:1px solid rgb(18 59 93 / 28%); color:var(--color-midnight-navy); }
 .button:hover,.outlineButton:hover { transform:translateY(-2px); box-shadow:inset 0 -2px var(--color-solar-orange); }
+.button, .outlineButton { transition-duration: .2s, .35s, .2s; }
+.button:focus-visible, .outlineButton:focus-visible { box-shadow:var(--shadow-freezing); }
+@media(hover:hover){.button:hover,.outlineButton:hover { box-shadow:var(--shadow-freezing); }}
 .button svg,.outlineButton svg { flex-shrink:0; }
 .actions { display:flex; flex-wrap:wrap; gap:.875rem; margin-top:1.75rem; }
 .hero { position:relative; overflow:clip; color:var(--color-ice-white); background:radial-gradient(ellipse at 85% 25%,rgb(0 199 232 / 15%),transparent 50%),linear-gradient(120deg,#091b30,#123b5d); }
+.hero { isolation:isolate; }
 .heroInner { display:grid; grid-template-columns:minmax(0,1fr); align-items:center; gap:2.5rem; padding-block:3.5rem; }
 .heroCopy { min-width:0; position:relative; z-index:1; }
 .hero .eyebrow { color:var(--color-electric-cyan); }

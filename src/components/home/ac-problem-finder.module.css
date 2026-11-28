@@ -94,11 +94,13 @@
   color: var(--color-midnight-navy);
   font-size: 0.875rem;
   font-weight: 650;
-  transition: box-shadow 200ms ease;
+  transition: box-shadow 350ms ease;
 }
 .bookingButton svg { flex-shrink: 0; }
 .bookingButton:hover { box-shadow: 0 5px 18px rgb(0 199 232 / 15%), inset 0 -2px 0 var(--color-solar-orange); }
 .bookingButton:focus-visible { outline: 2px solid var(--color-solar-orange); outline-offset: 4px; }
+.bookingButton:focus-visible { box-shadow: var(--shadow-freezing); }
+@media (hover: hover) { .bookingButton:hover { box-shadow: var(--shadow-freezing); } }
 
 @media (hover: hover) {
   .choice:hover .option { border-color: rgb(0 199 232 / 55%); background: rgb(0 199 232 / 6%); }

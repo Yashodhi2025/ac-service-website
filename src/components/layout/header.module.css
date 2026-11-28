@@ -170,9 +170,11 @@
   font-size: 0.875rem;
   font-weight: 650;
   white-space: nowrap;
-  transition: background-color 200ms ease, box-shadow 200ms ease;
+  transition: background-color 200ms ease, box-shadow 350ms ease;
 }
 .bookButton:hover { background: color-mix(in srgb, var(--color-electric-cyan) 92%, var(--color-ice-white)); box-shadow: 0 5px 18px rgb(0 199 232 / 22%), inset 0 -2px 0 var(--color-solar-orange); }
+.bookButton:focus-visible { box-shadow: var(--shadow-freezing); }
+@media (hover: hover) { .bookButton:hover { box-shadow: var(--shadow-freezing); } }
 .mobileToggle {
   display: grid;
   place-items: center;

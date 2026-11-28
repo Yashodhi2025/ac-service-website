@@ -1,0 +1,7 @@
+Asset: public/images/freezing-mist.webp
+Generated with the built-in imagegen tool, transparent_background=true.
+Delivery: 640px-wide WebP with preserved alpha, used as a cached Canvas sprite.
+The original A/C image is unchanged. The texture represents decorative cold vapor.
+
+Final prompt:
+Create a realistic transparent VFX sprite texture of thin cold condensation mist for animating air from an air conditioner. A single isolated softly irregular wisp of freezing breath / chilled water vapor, roughly horizontal and elongated, with delicate fine layered translucent white and pale icy-blue filaments, naturally varying low density and small internal turbulence. Very soft feathered edges fading all the way to zero alpha, generous fully transparent margins. Mostly transparent, not a solid cloud. Photographic cinematic volumetric vapor detail that will look natural when overlapped and advected in layers on dark navy. No black or colored background, genuinely transparent alpha. No machine, no snowflakes, no ice objects, no text, no glow baked outside the mist. Avoid cauliflower smoke, cartoon clouds, thick cigarette smoke, strong curls, swirls, hard boundaries, opaque white blobs or repeating patterns. Output one clean production VFX mist sprite on transparent background.

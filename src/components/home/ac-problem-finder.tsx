@@ -4,6 +4,7 @@ import { AudioLines, Check, Droplets, Move, Power, Snowflake, Sparkles, Wind } f
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useId, useState } from "react";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
+import { CoolingAtmosphere } from "@/components/animations/cooling-atmosphere";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { acProblems } from "@/config/ac-problems";
 import { company, getWhatsAppUrl } from "@/config/site";
@@ -31,6 +32,7 @@ export function AcProblemFinder() {
 
   return (
     <section id="ac-problem-finder" className={styles.section} aria-labelledby="ac-problems-heading">
+      <CoolingAtmosphere />
       <ScrollReveal className="page-container">
         <div className={styles.heading} data-scroll-reveal>
           <div>

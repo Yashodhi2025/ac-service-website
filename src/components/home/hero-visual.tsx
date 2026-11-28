@@ -5,11 +5,12 @@ import { Snowflake } from "lucide-react";
 import { motion, useInView, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import acUnit from "../../../public/images/ac-unit.png";
-import { Airflow } from "@/components/animations/airflow";
+import { FreezingAirflow } from "@/components/animations/freezing-airflow";
 import styles from "./hero.module.css";
 
 export function HeroVisual() {
   const ref = useRef<HTMLDivElement>(null);
+  const unitRef = useRef<HTMLImageElement>(null);
   const visible = useInView(ref, { amount: 0.1 });
   const reducedMotion = useReducedMotion();
   const [tabVisible, setTabVisible] = useState(true);
@@ -35,8 +36,9 @@ export function HeroVisual() {
           ? { duration: 6, repeat: Infinity, ease: "easeInOut" }
           : { duration: 0 }}
       >
-        <div className={styles.airflow}><Airflow /></div>
+        <FreezingAirflow unitRef={unitRef} />
         <Image
+          ref={unitRef}
           src={acUnit}
           alt="White wall-mounted air conditioner with open cooling vents"
           className={styles.unitImage}

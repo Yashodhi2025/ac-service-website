@@ -28,6 +28,7 @@
   color-scheme: light;
   --background: var(--color-ice-white);
   --foreground: var(--color-midnight-navy);
+  --shadow-freezing: 0 0 0 1px rgb(151 236 255 / 24%), 0 0 26px rgb(0 199 232 / 22%), 0 6px 18px rgb(0 199 232 / 12%), inset 0 1px 0 rgb(234 248 252 / 55%), inset 0 -2px 0 rgb(255 140 36 / 65%);
 }
 
 @theme inline {
