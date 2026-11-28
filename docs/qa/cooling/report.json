@@ -1,0 +1,355 @@
+{
+  "scenes": [
+    {
+      "name": "hero-desktop",
+      "width": 1366,
+      "renderer": "webgl",
+      "frames": [
+        {
+          "file": "hero-desktop-0.webp",
+          "seconds": 0.17
+        },
+        {
+          "file": "hero-desktop-1.webp",
+          "seconds": 2.14
+        },
+        {
+          "file": "hero-desktop-2.webp",
+          "seconds": 4.17
+        },
+        {
+          "file": "hero-desktop-3.webp",
+          "seconds": 6.16
+        }
+      ],
+      "changes": [
+        {
+          "meanChannelChange": 2.26,
+          "changedPercent": 23.4
+        },
+        {
+          "meanChannelChange": 2.38,
+          "changedPercent": 23.5
+        },
+        {
+          "meanChannelChange": 2.4,
+          "changedPercent": 24.2
+        }
+      ],
+      "video": "hero-desktop.webm"
+    },
+    {
+      "name": "section-desktop",
+      "width": 1366,
+      "renderer": "webgl",
+      "frames": [
+        {
+          "file": "section-desktop-0.webp",
+          "seconds": 0.13
+        },
+        {
+          "file": "section-desktop-1.webp",
+          "seconds": 2.09
+        },
+        {
+          "file": "section-desktop-2.webp",
+          "seconds": 4.11
+        },
+        {
+          "file": "section-desktop-3.webp",
+          "seconds": 6.12
+        }
+      ],
+      "changes": [
+        {
+          "meanChannelChange": 2.77,
+          "changedPercent": 44.5
+        },
+        {
+          "meanChannelChange": 2.98,
+          "changedPercent": 46.7
+        },
+        {
+          "meanChannelChange": 3,
+          "changedPercent": 46.4
+        }
+      ],
+      "video": "section-desktop.webm"
+    },
+    {
+      "name": "cta-desktop",
+      "width": 1366,
+      "renderer": "webgl",
+      "frames": [
+        {
+          "file": "cta-desktop-0.webp",
+          "seconds": 0.13
+        },
+        {
+          "file": "cta-desktop-1.webp",
+          "seconds": 2.13
+        },
+        {
+          "file": "cta-desktop-2.webp",
+          "seconds": 4.13
+        },
+        {
+          "file": "cta-desktop-3.webp",
+          "seconds": 6.11
+        }
+      ],
+      "changes": [
+        {
+          "meanChannelChange": 2.78,
+          "changedPercent": 44.5
+        },
+        {
+          "meanChannelChange": 2.97,
+          "changedPercent": 46.6
+        },
+        {
+          "meanChannelChange": 3.01,
+          "changedPercent": 46.6
+        }
+      ],
+      "video": "cta-desktop.webm"
+    },
+    {
+      "name": "footer-desktop",
+      "width": 1366,
+      "renderer": "webgl",
+      "frames": [
+        {
+          "file": "footer-desktop-0.webp",
+          "seconds": 0.15
+        },
+        {
+          "file": "footer-desktop-1.webp",
+          "seconds": 2.13
+        },
+        {
+          "file": "footer-desktop-2.webp",
+          "seconds": 4.14
+        },
+        {
+          "file": "footer-desktop-3.webp",
+          "seconds": 6.16
+        }
+      ],
+      "changes": [
+        {
+          "meanChannelChange": 3.33,
+          "changedPercent": 49.8
+        },
+        {
+          "meanChannelChange": 3.57,
+          "changedPercent": 52.1
+        },
+        {
+          "meanChannelChange": 3.6,
+          "changedPercent": 51.4
+        }
+      ],
+      "video": "footer-desktop.webm"
+    },
+    {
+      "name": "hero-mobile",
+      "width": 390,
+      "renderer": "webgl",
+      "frames": [
+        {
+          "file": "hero-mobile-0.webp",
+          "seconds": 0.07
+        },
+        {
+          "file": "hero-mobile-1.webp",
+          "seconds": 2.06
+        },
+        {
+          "file": "hero-mobile-2.webp",
+          "seconds": 4.07
+        },
+        {
+          "file": "hero-mobile-3.webp",
+          "seconds": 6.07
+        }
+      ],
+      "changes": [
+        {
+          "meanChannelChange": 2.19,
+          "changedPercent": 23.3
+        },
+        {
+          "meanChannelChange": 2.18,
+          "changedPercent": 23.3
+        },
+        {
+          "meanChannelChange": 2.19,
+          "changedPercent": 22.8
+        }
+      ],
+      "video": "hero-mobile.webm"
+    },
+    {
+      "name": "footer-mobile",
+      "width": 390,
+      "renderer": "webgl",
+      "frames": [
+        {
+          "file": "footer-mobile-0.webp",
+          "seconds": 0.04
+        },
+        {
+          "file": "footer-mobile-1.webp",
+          "seconds": 2.05
+        },
+        {
+          "file": "footer-mobile-2.webp",
+          "seconds": 4.05
+        },
+        {
+          "file": "footer-mobile-3.webp",
+          "seconds": 6.04
+        }
+      ],
+      "changes": [
+        {
+          "meanChannelChange": 3.45,
+          "changedPercent": 51.5
+        },
+        {
+          "meanChannelChange": 4,
+          "changedPercent": 57.8
+        },
+        {
+          "meanChannelChange": 3.63,
+          "changedPercent": 52.8
+        }
+      ],
+      "video": "footer-mobile.webm"
+    }
+  ],
+  "layouts": [
+    320,
+    390,
+    768,
+    1024,
+    1366,
+    1920
+  ],
+  "checks": [
+    {
+      "width": 1366,
+      "fps": 29.865604778496767,
+      "bufferWidth": 670,
+      "bufferHeight": 502
+    },
+    {
+      "width": 390,
+      "fps": 23.94612122723871,
+      "bufferWidth": 372,
+      "bufferHeight": 273
+    },
+    "Offscreen pause, tab pause/resume, reduced-motion and context restoration pass",
+    "Problem selection, WhatsApp draft, original A/C/indicator and nine sections preserved",
+    {
+      "fallback": {
+        "meanChannelChange": 2.09,
+        "changedPercent": 22.9
+      }
+    },
+    "Live reduced-motion toggle resumes the active field",
+    "Live reduced-motion toggle resumes the active field"
+  ],
+  "playback": [
+    {
+      "name": "hero-desktop",
+      "width": 427,
+      "height": 320,
+      "seconds": 2.9471,
+      "decoded": 27,
+      "changedPercent": 81.4
+    },
+    {
+      "name": "footer-desktop",
+      "width": 1351,
+      "height": 192,
+      "seconds": 3.155,
+      "decoded": 98,
+      "changedPercent": 54.7
+    },
+    {
+      "name": "hero-mobile",
+      "width": 372,
+      "height": 273,
+      "seconds": 2.9324,
+      "decoded": 71,
+      "changedPercent": 22.6
+    },
+    {
+      "name": "footer-mobile",
+      "width": 351,
+      "height": 101,
+      "seconds": 2.8061,
+      "decoded": 71,
+      "changedPercent": 53.1
+    }
+  ],
+  "environment": {
+    "browser": "Chrome headless on Windows",
+    "viewports": "Desktop and emulated mobile; six-second production captures",
+    "productionBuild": "pass",
+    "eslint": "pass"
+  },
+  "investigation": {
+    "oldCss": {
+      "durationSeconds": 26,
+      "threeSecondTranslationPixels": 20.72,
+      "opacityBefore": 0.0881,
+      "opacityAfter": 0.1038,
+      "playbackState": "running",
+      "reducedMotion": false
+    },
+    "oldSvgStreamsStillMounted": 10,
+    "heroCause": "Evenly spaced texture lanes and horizontal slices produced streaks and seams.",
+    "reducedMotionHandoff": "The replacement reconciles media preference and still-frame state both in the change listener and the frame loop."
+  },
+  "encodedVideos": [
+    {
+      "name": "hero-desktop",
+      "frames": 119,
+      "durationSeconds": 6.349,
+      "encodedFPS": 18.7
+    },
+    {
+      "name": "section-desktop",
+      "frames": 182,
+      "durationSeconds": 6.131,
+      "encodedFPS": 29.7
+    },
+    {
+      "name": "cta-desktop",
+      "frames": 191,
+      "durationSeconds": 6.364,
+      "encodedFPS": 30
+    },
+    {
+      "name": "footer-desktop",
+      "frames": 185,
+      "durationSeconds": 6.332,
+      "encodedFPS": 29.2
+    },
+    {
+      "name": "hero-mobile",
+      "frames": 148,
+      "durationSeconds": 6.379,
+      "encodedFPS": 23.2
+    },
+    {
+      "name": "footer-mobile",
+      "frames": 149,
+      "durationSeconds": 6.366,
+      "encodedFPS": 23.4
+    }
+  ]
+}

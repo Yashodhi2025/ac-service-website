@@ -1,0 +1,7 @@
+Asset: public/images/vapor-density.webp
+Generated with the built-in imagegen tool, transparent_background=false.
+Delivery: 512 x 512 grayscale WebP density map. Brightness is converted to vapor opacity in the Canvas renderer; black pixels are transparent air, never a displayed background.
+The existing ECME logo, hero A/C cutout and service photography are unchanged.
+
+Final prompt:
+A production VFX grayscale density texture of photorealistic thin cold condensation vapor on a perfectly pure black background. Square, black and white only. Fine intricate irregular torn gaseous veils and soft wisps, gently curled turbulent filaments, diffuse overlapping transparent-looking layers photographed as chilled breath in a dark studio. Many small and medium scale delicate vapor structures loosely interconnected across the square, plenty of pure black gaps. Beautiful detailed natural vapor surface structure, crisp fine filaments with softly feathered edges, no excessive blur. Moderate density, never dense opaque cloud centers. Fairly uniform distribution throughout without a central focal cloud and without dominant horizontal or vertical direction. Vapor fades to pure black at the outer edges. This is a LUMINANCE DENSITY MAP for a fluid shader: black means empty air, white means denser vapor. Actual image must have solid black background, opaque RGB, no alpha transparency, no checkerboard anywhere, no gray backdrop. No round smoke puffs, no cauliflower clouds, no water, no rain, no waterfall, no beams, no stripes, no lines, no objects, no text, no borders.

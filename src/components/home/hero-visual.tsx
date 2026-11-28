@@ -5,7 +5,7 @@ import { Snowflake } from "lucide-react";
 import { motion, useInView, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import acUnit from "../../../public/images/ac-unit.png";
-import { FreezingAirflow } from "@/components/animations/freezing-airflow";
+import { VaporField } from "@/components/animations/vapor-field";
 import styles from "./hero.module.css";
 
 export function HeroVisual() {
@@ -36,7 +36,7 @@ export function HeroVisual() {
           ? { duration: 6, repeat: Infinity, ease: "easeInOut" }
           : { duration: 0 }}
       >
-        <FreezingAirflow unitRef={unitRef} />
+        <VaporField direction="down" unitRef={unitRef} />
         <Image
           ref={unitRef}
           src={acUnit}
