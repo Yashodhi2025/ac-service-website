@@ -104,6 +104,7 @@
   border-radius: 50%;
   pointer-events: none;
 }
+.unitParallax { position: absolute; inset: 0; will-change: transform; }
 .floatingUnit { position: absolute; inset: 0; }
 .unitImage {
   position: absolute;
@@ -114,11 +115,14 @@
   height: auto;
   filter: drop-shadow(0 22px 24px rgb(0 0 0 / 18%));
 }
-.temperature {
+.temperatureWrap {
   position: absolute;
   z-index: 2;
   right: 0;
   bottom: 7%;
+  will-change: transform;
+}
+.temperature {
   display: flex;
   align-items: center;
   gap: 0.875rem;
@@ -156,7 +160,7 @@
   }
   .headline { font-size: clamp(2.6rem, 4.2vw, 4rem); }
   .visual { height: 27.5rem; }
-  .temperature { right: 1%; bottom: 10%; }
+  .temperatureWrap { right: 1%; bottom: 10%; }
 }
 
 @media (max-width: 479px) {

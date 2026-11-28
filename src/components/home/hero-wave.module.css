@@ -1,0 +1,36 @@
+.waveWrap {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: clamp(2.75rem, 5.5vw, 5.25rem);
+  margin-top: -0.25rem;
+  margin-bottom: -1px;
+  overflow: hidden;
+  line-height: 0;
+  pointer-events: none;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.accentLine {
+  fill: none;
+  stroke: url(#ecme-hero-wave-stroke);
+  stroke-width: 2.25;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.72;
+}
+
+.fillPath {
+  fill: var(--color-ice-white);
+}
+
+@media (max-width: 639px) {
+  .waveWrap {
+    height: clamp(2.25rem, 8vw, 3.25rem);
+  }
+}

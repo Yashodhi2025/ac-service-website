@@ -1,0 +1,42 @@
+.bridge {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: clamp(2.25rem, 4.5vw, 4rem);
+  margin-top: -2px;
+  margin-bottom: -2px;
+  overflow: hidden;
+  line-height: 0;
+  pointer-events: none;
+}
+
+.lightToDark {
+  background: var(--bridge-top, var(--color-ice-white));
+}
+
+.darkToLight {
+  background: var(--bridge-top, var(--color-midnight-navy));
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.fillDark {
+  fill: var(--bridge-bottom, var(--color-midnight-navy));
+}
+
+.fillLight {
+  fill: var(--bridge-bottom, var(--color-ice-white));
+}
+
+.rim {
+  fill: none;
+  stroke: var(--color-electric-cyan);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.42;
+}

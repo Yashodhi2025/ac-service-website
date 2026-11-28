@@ -2,12 +2,13 @@
 
 import { AudioLines, Check, Droplets, Move, Power, Snowflake, Sparkles, Wind } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useId, useState } from "react";
-import { ScrollReveal } from "@/components/animations/scroll-reveal";
+import { useEffect, useId, useRef, useState } from "react";
+import { gsap } from "gsap";
 import { CoolingAtmosphere } from "@/components/animations/cooling-atmosphere";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { acProblems } from "@/config/ac-problems";
 import { company, getWhatsAppUrl } from "@/config/site";
+import { ensureGsap, MOTION_QUERIES } from "@/lib/gsap";
 import styles from "./ac-problem-finder.module.css";
 
 const problemIcons = {
@@ -24,29 +25,140 @@ type ProblemId = (typeof acProblems)[number]["id"];
 export function AcProblemFinder() {
   const [selectedId, setSelectedId] = useState<ProblemId>(acProblems[0].id);
   const groupId = useId();
+  const rootRef = useRef<HTMLElement>(null);
   const reducedMotion = useReducedMotion();
   const selected = acProblems.find((problem) => problem.id === selectedId) ?? acProblems[0];
   const SelectedIcon = problemIcons[selected.icon];
   const bookingMessage = `Hello ${company.name}, I'd like to book an A/C service for: ${selected.label}. Could you help me arrange an assessment?`;
   const bookingUrl = getWhatsAppUrl(bookingMessage);
 
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    ensureGsap();
+
+    const media = gsap.matchMedia(root);
+    media.add(
+      {
+        desktop: MOTION_QUERIES.desktop,
+        mobile: MOTION_QUERIES.mobile,
+      },
+      (context) => {
+        const isDesktop = Boolean(context.conditions?.desktop);
+
+        try {
+          const headLeft = root.querySelector<HTMLElement>("[data-pf-head-left]");
+          const headRight = root.querySelector<HTMLElement>("[data-pf-head-right]");
+          const leftPanel = root.querySelector<HTMLElement>("[data-pf-panel='left']");
+          const rightPanel = root.querySelector<HTMLElement>("[data-pf-panel='right']");
+          const layout = root.querySelector<HTMLElement>("[data-pf-layout]");
+
+          if (isDesktop) {
+            // Desktop: scroll-linked opposite-direction convergence for headings and panels
+            const headTl = gsap.timeline({
+              scrollTrigger: {
+                trigger: root,
+                start: "top 88%",
+                end: "top 46%",
+                scrub: 0.55,
+              },
+            });
+            if (headLeft) headTl.fromTo(headLeft, { x: -32, opacity: 0.25 }, { x: 0, opacity: 1, ease: "none" }, 0);
+            if (headRight) headTl.fromTo(headRight, { x: 32, opacity: 0.25 }, { x: 0, opacity: 1, ease: "none" }, 0);
+
+            const panelTl = gsap.timeline({
+              scrollTrigger: {
+                trigger: layout ?? root,
+                start: "top 92%",
+                end: "top 44%",
+                scrub: 0.6,
+              },
+            });
+            if (leftPanel) {
+              panelTl.fromTo(
+                leftPanel,
+                { x: -56, opacity: 0.15 },
+                { x: 0, opacity: 1, ease: "none" },
+                0
+              );
+            }
+            if (rightPanel) {
+              panelTl.fromTo(
+                rightPanel,
+                { x: 56, opacity: 0.15 },
+                { x: 0, opacity: 1, ease: "none" },
+                0
+              );
+            }
+          } else {
+            // Mobile: lightweight opposite-direction panel reveals (contained inside overflow: clip)
+            if (headLeft) {
+              gsap.from(headLeft, {
+                x: -16,
+                opacity: 0,
+                duration: 0.6,
+                ease: "power3.out",
+                clearProps: "transform,opacity",
+                scrollTrigger: { trigger: headLeft, start: "top 90%", once: true },
+              });
+            }
+            if (headRight) {
+              gsap.from(headRight, {
+                x: 16,
+                opacity: 0,
+                duration: 0.6,
+                ease: "power3.out",
+                clearProps: "transform,opacity",
+                scrollTrigger: { trigger: headRight, start: "top 90%", once: true },
+              });
+            }
+            if (leftPanel) {
+              gsap.from(leftPanel, {
+                x: -20,
+                opacity: 0,
+                duration: 0.65,
+                ease: "power3.out",
+                clearProps: "transform,opacity",
+                scrollTrigger: { trigger: leftPanel, start: "top 90%", once: true },
+              });
+            }
+            if (rightPanel) {
+              gsap.from(rightPanel, {
+                x: 20,
+                opacity: 0,
+                duration: 0.65,
+                ease: "power3.out",
+                clearProps: "transform,opacity",
+                scrollTrigger: { trigger: rightPanel, start: "top 90%", once: true },
+              });
+            }
+          }
+        } catch {
+          // Leave interactive panels fully visible if animation setup fails.
+        }
+      }
+    );
+
+    return () => media.revert();
+  }, []);
+
   return (
-    <section id="ac-problem-finder" className={styles.section} aria-labelledby="ac-problems-heading">
+    <section ref={rootRef} id="ac-problem-finder" className={styles.section} aria-labelledby="ac-problems-heading" data-tone-section="problem-finder">
       <CoolingAtmosphere />
-      <ScrollReveal className="page-container">
-        <div className={styles.heading} data-scroll-reveal>
-          <div>
+      <div className="page-container">
+        <div className={styles.heading}>
+          <div data-pf-head-left>
             <p className={styles.eyebrow}>Let’s find your next step</p>
             <h2 id="ac-problems-heading" className={styles.title}>What&apos;s Wrong With Your A/C?</h2>
           </div>
-          <p className={styles.intro}>
+          <p className={styles.intro} data-pf-head-right>
             Tell us what you&apos;re noticing. We&apos;ll suggest a service to discuss
             with {company.shortName}.
           </p>
         </div>
 
-        <div className={styles.layout} data-scroll-reveal>
-          <fieldset className={styles.choices}>
+        <div className={styles.layout} data-pf-layout>
+          <fieldset className={styles.choices} data-pf-panel="left">
             <legend className={styles.legend}>Choose the closest match</legend>
             <div className={styles.optionGrid}>
               {acProblems.map((problem) => {
@@ -90,7 +202,7 @@ export function AcProblemFinder() {
             <p className={styles.choiceNote}>A little guidance. A clearer conversation.</p>
           </fieldset>
 
-          <div id={`${groupId}-suggestion`} className={styles.suggestion}>
+          <div id={`${groupId}-suggestion`} className={styles.suggestion} data-pf-panel="right">
             <div className={styles.suggestionHeader}>
               <Sparkles size={16} strokeWidth={1.5} aria-hidden="true" />
               Suggested service
@@ -136,7 +248,7 @@ export function AcProblemFinder() {
         <div className={styles.srOnly} role="status" aria-live="polite" aria-atomic="true">
           {selected.label}. Suggested service: {selected.service}. {selected.explanation}
         </div>
-      </ScrollReveal>
+      </div>
     </section>
   );
 }

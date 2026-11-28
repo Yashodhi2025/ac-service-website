@@ -10,22 +10,26 @@ export function ServiceTile({ service }: { service: ExpertiseService }) {
   const descriptionId = `expertise-${service.id}-description`;
 
   return (
-    <li className={`${styles.tile} ${styles[service.layout]}`} data-scroll-reveal>
+    <li className={`${styles.tile} ${styles[service.layout]}`} data-exp-tile>
       <Link
         href={getServiceHref(service.id)}
         className={styles.tileLink}
         aria-labelledby={titleId}
         aria-describedby={descriptionId}
       >
-        <div className={styles.imageWrap}>
-          <Image src={service.image} alt={service.imageAlt} fill sizes={service.sizes} className={styles.image} />
+        <div className={styles.imageWrap} data-exp-photo-wrap>
+          <div className={styles.imageStage} data-exp-photo>
+            <Image src={service.image} alt={service.imageAlt} fill sizes={service.sizes} className={styles.image} />
+          </div>
         </div>
         <span className={styles.scrim} aria-hidden="true" />
         <div className={styles.tileContent}>
-          <h3 id={titleId} className={styles.tileTitle}>{service.name}</h3>
-          <p id={descriptionId} className={styles.tileDescription}>{service.description}</p>
+          <h3 id={titleId} className={styles.tileTitle} data-exp-tile-title>{service.name}</h3>
+          <p id={descriptionId} className={styles.tileDescription} data-exp-tile-desc>{service.description}</p>
         </div>
-        <span className={styles.tileArrow} aria-hidden="true"><ArrowUpRight size={21} strokeWidth={1.7} /></span>
+        <span className={styles.tileArrow} data-exp-tile-arrow aria-hidden="true">
+          <ArrowUpRight size={21} strokeWidth={1.7} />
+        </span>
       </Link>
     </li>
   );

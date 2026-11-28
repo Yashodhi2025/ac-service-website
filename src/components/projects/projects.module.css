@@ -1,6 +1,7 @@
 .gallery { display:grid; grid-template-columns:minmax(0,1fr); gap:2rem 1.5rem; margin-top:2rem; }
 .projectButton { width:100%; text-align:left; cursor:pointer; }
 .projectImage { position:relative; display:block; height:20rem; overflow:hidden; border-radius:1.25rem; }
+.projectStage { position:absolute; inset:0; display:block; will-change:transform; }
 .projectImage img { object-fit:cover; transition:transform .6s; }
 .projectButton:hover img { transform:scale(1.05); }
 .projectCategory { display:block; color:var(--color-ocean-blue); font-size:.875rem; margin-top:1rem; }

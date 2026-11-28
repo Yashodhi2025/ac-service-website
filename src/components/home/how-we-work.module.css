@@ -1,7 +1,9 @@
 .section {
+  position: relative;
+  overflow-x: clip;
   padding-block: var(--spacing-section);
   color: var(--color-midnight-navy);
-  background: var(--color-ice-white);
+  background: var(--work-bg, var(--color-ice-white));
 }
 
 .heading { max-width: 48rem; margin-inline: auto; margin-bottom: 3rem; text-align: center; }
